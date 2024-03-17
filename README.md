@@ -1,22 +1,12 @@
-# Transcriptomics-guided Slide Representation Learning in Computational Pathology
+# Code for Transcriptomics-guided Slide Representation Learning in Computational Pathology
 
-Welcome to the official GitHub repository for our CVPR 2024 paper, "Transcriptomics-guided Slide Representation Learning in Computational Pathology". This work represents a collaborative effort among researchers from various institutions, aiming to push the boundaries of computational pathology through innovative machine learning techniques.
-
-## Authors
-- Guillaume Jaume
-- Lukas Oldenburg
-- Anurag Jayant Vaidya
-- Richard J. Chen
-- Drew FK Williamson
-- Thomas Peeters
-- Andrew H. Song
-- Faisal Mahmood
+Welcome to the official GitHub repository for our CVPR 2024 paper, "Transcriptomics-guided Slide Representation Learning in Computational Pathology". This project was developed by the Mahmood Lab at Harvard Medical School and Brigham and Women's Hospital. 
 
 ## Highlights
 <!-- Bullet points of key findings, innovations, or contributions made by this work. -->
 
 ## Code
-This repository contains the implementation of our methods described in the paper. Below you will find instructions on how to set up and use our code.
+This repository contains the implementation of our methods described in the paper. Below are instructions on how to set up and use our code.
 
 ### Installation
 <!-- Step-by-step instructions to set up the environment and install necessary dependencies. -->
@@ -34,7 +24,7 @@ pip install -r requirements.txt
 
 ```bash
 # Example placeholder command for training the model
-python train.py --config configs/your_model_config.yaml
+python train_tangle.py --config ADD ARGUMENTS
 
 # Example placeholder command for evaluating the model
 python evaluate.py --checkpoint path/to/your/model.ckpt
