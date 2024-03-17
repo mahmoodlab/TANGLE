@@ -2,6 +2,8 @@
 
 Welcome to the official GitHub repository for our CVPR 2024 paper, "Transcriptomics-guided Slide Representation Learning in Computational Pathology". This project was developed by the Mahmood Lab at Harvard Medical School and Brigham and Women's Hospital. 
 
+![Placeholder Image](support/placeholder.png "Overview of TANGLE")
+
 ## Highlights
 <!-- Bullet points of key findings, innovations, or contributions made by this work. -->
 
