@@ -5,10 +5,12 @@ Welcome to the official GitHub repository for our CVPR 2024 paper, "Transcriptom
 ![Alt text for the image](support/framework.png "Optional title")
 
 ## Highlights
-<!-- Bullet points of key findings, innovations, or contributions made by this work. -->
+This work introduces the first method for slide representation learning using multimodal pretraining. Slide representation learning defines a new class of self-supervised methods that aim at extracting information-rich embeddings of hisotlogy whole-slide images, without using explicit supervision (such as cancer subtype or cancer grade). In this work, we introduce TANGLE, a methods for Slide + Expression (S+E) pretraining. Conceptually, this method follows the CLIP principle widely employed in Vision-Language model. 
+
+Here, we align the slide with its corresponding gene expression profile. The resulting slide encoder embeds the underlying molecular landscape of the tissue, and, as such, can be used for various downstream tasks. In this work, we focus on morphological subtyping of breast and lung cancer, and morphological lesion detection in pre-clinical drug safety studies.  
 
 ## Code
-This repository contains the implementation of our methods described in the paper. Below are instructions on how to set up and use our code.
+This repository contains the implementation of TANGLE, with step-by-step instructions and data to reproduce results on the TCGA-BRCA (Invasive breast cancer) cohort. 
 
 ### Installation
 <!-- Step-by-step instructions to set up the environment and install necessary dependencies. -->
