@@ -13,7 +13,6 @@ Here, we align the slide with its corresponding gene expression profile. The res
 This repository contains the implementation of TANGLE, with step-by-step instructions and data to reproduce results on the TCGA-BRCA (Invasive breast cancer) cohort. 
 
 ### Installation
-<!-- Step-by-step instructions to set up the environment. -->
 
 ```bash
 # Clone repo
@@ -25,14 +24,30 @@ conda create -n tangle
 conda activate tangle
 ```
 
-<!-- Instructions on how to run the code, including preparing data, training models, and evaluating results. -->
+### Preprocessing 
+
+This code assumes that you have already pre-processed your dataset.
+
+Preprocessing whole-slide images requires (1) segmenting the tissue, (2) extracting patches, and (3) extracting patch embeddings. In breast and lung cohorts, we train TANGLE using ResNet50 features pretrained on ImageNet and CTransPath. 
+
+- Tissue segmentation, patching and ResNet50 patch embedding extraction can be done using the [CLAM toolbox](https://github.com/mahmoodlab/CLAM).
+- CTransPath patch embedding extraction can be done using the [official implementation](https://github.com/Xiyue-Wang/TransPath). 
+
+Preprocessing the corresponding gene expression profile can be done in several ways. For the TCGA cohorts, we used normalized RNA sequencing data available [here](https://xenabrowser.net/datapages/?dataset=TCGA.BRCA.sampleMap%2FHiSeqV2_PANCAN&host=https%3A%2F%2Ftcga.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443). A more processed form can be accessed [here](https://github.com/mahmoodlab/SurvPath/blob/main/datasets_csv/raw_rna_data/combine/brca/rna_clean.csv).
+
+
+### Train Tangle
 
 ```bash
-# Example placeholder command for training the model
-python train_tangle.py --config ADD ARGUMENTS
+# Train Tangle
+source scripts/launch_tangle_training.sh
+```
 
-# Example placeholder command for evaluating the model
-python evaluate.py --checkpoint path/to/your/model.ckpt
+### Evaluate Tangle
+
+```bash
+# Few-shot evaluation
+source scripts/launch_tangle_evaluation.sh
 ```
 
 ### Citation

@@ -15,66 +15,24 @@ from core.utils.learning import set_seed
 
 import pdb 
         
-##################### INPUT PARAMS #####################
+##################### Models to test... #####################
 
 feature_dirs_train = [
-    # # LUNG TANGLE:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/tcga_results_dict.pkl",
-    # # LUNG TANGLE-Rec:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/tcga_results_dict.pkl",
-    # # LUNG Intra:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/tcga_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/tcga_results_dict.pkl",
     # BREAST TANGLE:
-    "./legacy_results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/tcga_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/tcga_results_dict.pkl",
     # BREAST TANGLE-REC:
-    "./legacy_results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/tcga_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/tcga_results_dict.pkl",
     # BREAST INTRA:
-    "./legacy_results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/tcga_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/tcga_results_dict.pkl",
 ]
 
 feature_dirs_test = [
-    # # LUNG TANGLE:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tangle_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/mgb_results_dict.pkl",
-    # # LUNG TANGLE-Rec:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/tanglerec_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/mgb_results_dict.pkl",
-    # # LUNG Intra:
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize1024_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/mgb_results_dict.pkl",
-    # "./legacy_results/nsclc_checkpoints_and_embeddings/intra_nsclc_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/mgb_results_dict.pkl",
     # BREAST TANGLE:
-    "./legacy_results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/mgb_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/mgb_results_dict.pkl",
     # BREAST TANGLE-REC:
-    "./legacy_results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/mgb_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/mgb_results_dict.pkl",
     # BREAST INTRA:
-    "./legacy_results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/mgb_results_dict.pkl",
+    "./results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/mgb_results_dict.pkl",
 ]
 
 save_dir = './results/'
