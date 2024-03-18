@@ -16,11 +16,15 @@ This repository contains the implementation of TANGLE, with step-by-step instruc
 <!-- Step-by-step instructions to set up the environment and install necessary dependencies. -->
 
 ```bash
-# Example placeholder command for cloning the repo
+# Clone repo
 git clone https://github.com/your-repository-url.git
 cd your-repository-directory
 
-# Example placeholder command for installing dependencies
+# Create conda env
+conda create -n tangle
+conda activate tangle
+
+# Instal dependencies
 pip install -r requirements.txt
 ```
 
