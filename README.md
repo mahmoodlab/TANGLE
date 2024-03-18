@@ -53,6 +53,11 @@ We provide a link to a Drive that includes (1) 3 pretrained checkpoints for Tang
 source scripts/launch_tangle_evaluation.sh
 ```
 
+## Issues 
+- The preferred mode of communication is via GitHub issues.
+- If GitHub issues are not appropriate, email `gjaume@bwh.harvard.edu` (and cc `avaidya@mit.edu`). 
+- Immediate response to minor issues may not be available.
+
 ### Citation
 
 If you find our work useful in your research, please consider citing:
