@@ -7,7 +7,6 @@ import pickle
 
 # --> Torch imports 
 import torch
-from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 import time
 import torch.nn as nn
@@ -306,7 +305,7 @@ if __name__ == "__main__":
     print()
     print("Compute and store TCGA embeddings...")
     print()
-    tcga_results_dict, val_rank = val_loop(ssl_model, val_dataloader)
+    tcga_results_dict, val_rank = val_loop(ssl_model, indomain_dataloader)
     writer.add_scalar("TCGA_val_rank", val_rank)
     print("Rank = {}".format(val_rank))
         
@@ -314,13 +313,13 @@ if __name__ == "__main__":
     print()
     print("Compute and store of-of-domain embeddings...")
     print()
-    outofdomain_results_dict, _ = val_loop(ssl_model, test_dataloader)
+    outofdomain_results_dict, _ = val_loop(ssl_model, outofdomain_dataloader)
     
     # save 
     with open(os.path.join(RESULTS_SAVE_PATH, "tcga_results_dict.pkl"), 'wb') as handle:
         pickle.dump(tcga_results_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     
-    with open(os.path.join(RESULTS_SAVE_PATH, "outofdomain_results_dict.pkl"), 'wb') as handle:
+    with open(os.path.join(RESULTS_SAVE_PATH, "mgb_results_dict.pkl"), 'wb') as handle:
         pickle.dump(outofdomain_results_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     print()
