@@ -9,30 +9,34 @@ from .abmil import BatchedABMIL
 
 
 class MMSSL(nn.Module):
-    def __init__(self, config, n_tokens_wsi, n_tokens_rna, patch_embedding_dim=768):
+    def __init__(self, config, n_tokens_rna):
         super(MMSSL, self).__init__()
+
         self.config = config
-        self.n_tokens_wsi = n_tokens_wsi
+        self.n_tokens_wsi = config['n_tokens'] 
+        self.patch_embedding_dim = config['embedding_dim']
         self.n_tokens_rna = n_tokens_rna
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.patch_embedding_dim = patch_embedding_dim
 
         ########## WSI embedder: ABMIL #############
-        pre_params = {'input_dim': self.patch_embedding_dim,
-                        'hidden_dim': 768
-                        }
-        attention_params = {'model': 'ABMIL',
-                        'params': {
-                        'input_dim': 768,
-                        'hidden_dim': 512,
-                        'dropout': True, 
-                        'activation': self.config["activation"],
-                        'n_classes': 1 
-                            }
-                            }
-        self.wsi_embedder = ABMILEmbedder(pre_attention_params=pre_params,
-                                            attention_params=attention_params,
-                                            )
+        pre_params = {
+            'input_dim': self.patch_embedding_dim,
+            'hidden_dim': 768
+        }
+        attention_params = {
+            'model': 'ABMIL',
+            'params': {
+                'input_dim': 768,
+                'hidden_dim': 512,
+                'dropout': True, 
+                'activation': 'softmax',
+                'n_classes': 1 
+            }
+        }
+        self.wsi_embedder = ABMILEmbedder(
+            pre_attention_params=pre_params,
+            attention_params=attention_params,
+        )
 
         
         ########## RNA embedder: Linear or MLP #############

@@ -19,7 +19,7 @@ from tensorboardX import SummaryWriter
 
 
 class TangleDataset(Dataset):
-    def __init__(self, feats_dir, coords_dir, rna_dir, n_tokens, sampling_strategy="random"):
+    def __init__(self, feats_dir, rna_dir, n_tokens, sampling_strategy="random"):
         """
         - feats_dir: str, directory where feat .pt files are stored
         - rna_dir: str, directory where rna_data .pt files are stored
@@ -27,7 +27,6 @@ class TangleDataset(Dataset):
         - sampling_strategy: str, strategy to sample patches ("random" or "kmeans_cluster")
         """
         self.feats_dir = feats_dir
-        self.coords_dir = coords_dir
         self.rna_dir = rna_dir
         self.n_tokens = n_tokens
         self.sampling_strategy = sampling_strategy

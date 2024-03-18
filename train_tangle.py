@@ -18,7 +18,7 @@ from tensorboardX import SummaryWriter
 
 # --> internal imports 
 from core.models.mmssl import MMSSL
-from core.dataset.dataset import TangleDataset
+from core.dataset.dataset import TangleDataset, SlideDataset
 from core.loss.tangle_loss import InfoNCE, apply_random_mask, init_intra_wsi_loss_function
 from core.utils.learning import smooth_rank_measure, collate_tangle, collate_slide, set_seed
 from core.utils.process_args import process_args
@@ -159,11 +159,13 @@ if __name__ == "__main__":
     
     # setup args and seed
     args = process_args()
+    args = vars(args)
     set_seed(args["seed"])
     
     RNA_RECONSTRUCTION = True if args["method"] == 'tanglerec' else False 
     INTRA_MODALITY = True if args["method"] == 'intra' else False 
     STOPPING_CRITERIA = 'train_rank' if args["method"] == 'tangle' or args["method"] == 'intra' else 'fixed'
+    N_TOKENS_RNA = 4908 if args["study"]=='nsclc' else 4999
 
     args["rna_reconstruction"] = RNA_RECONSTRUCTION
     args["intra_modality_wsi"] = INTRA_MODALITY
@@ -176,7 +178,7 @@ if __name__ == "__main__":
         args["learning_rate"], 
         args["epochs"], 
         args["batch_size"], 
-        args["token_size"],
+        args["n_tokens"],
         args["temperature"]
     )
     RESULTS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
@@ -196,7 +198,6 @@ if __name__ == "__main__":
     print("* Setup dataset...")
     dataset = TangleDataset(
         feats_dir="./data/{}/ctranspath_features/tcga_features/".format(args["study"]), 
-        coords_dir="./data/{}/coords".format(args["study"]),
         rna_dir='./data/{}/rna'.format(args["study"]), 
         sampling_strategy=args["sampling_strategy"], 
         n_tokens=args["n_tokens"]
@@ -204,7 +205,7 @@ if __name__ == "__main__":
     
     # in-domain dataset loader for extracting in-domain slide embeddings. 
     PATH_TO_INDOMAIN_FEATS = "./data/{}/ctranspath_features/tcga_features/".format(args["study"])
-    PATH_TO_INDOMAIN_CSV = "./data/{}_checkpoints_and_embeddings/csvs/tcga_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
+    PATH_TO_INDOMAIN_CSV = "./data/{}/csvs/tcga_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
     indomain_dataset = SlideDataset(
         csv_path=PATH_TO_INDOMAIN_CSV, 
         features_path=PATH_TO_INDOMAIN_FEATS
@@ -212,7 +213,7 @@ if __name__ == "__main__":
 
     # out-of-domain dataset loader for extracting out-of-domain slide embeddings. 
     PATH_TO_OUOFDOMAIN_FEATS = "./data/{}/ctranspath_features/mgb_features/".format(args["study"])
-    PATH_TO_OUTOFDOMAIN_CSV = "./data/{}_checkpoints_and_embeddings/csvs/op_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
+    PATH_TO_OUTOFDOMAIN_CSV = "./data/{}/csvs/op_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
     outofdomain_dataset = SlideDataset(
         csv_path=PATH_TO_OUTOFDOMAIN_CSV, 
         features_path=PATH_TO_OUOFDOMAIN_FEATS
@@ -232,13 +233,8 @@ if __name__ == "__main__":
     # set up model config, n_tokens_wsi, n_tokens_rna, patch_embedding_dim=768
     print("* Setup model...")
     
-    ssl_model = MMSSL(
-        config=args,
-        n_tokens_wsi=args["n_tokens"],
-        n_tokens_rna=4908 if args["study"]=='nsclc' else 4999,
-        patch_embedding_dim=args["embedding_dim"]
-    ).to(DEVICE)
-        
+    ssl_model = MMSSL(config=args, n_tokens_rna=N_TOKENS_RNA).to(DEVICE)
+    
     if len(args["gpu_devices"]) > 1:
         print(f"* Using {torch.cuda.device_count()} GPUs.")
         ssl_model = nn.DataParallel(ssl_model, device_ids=args["gpu_devices"])
