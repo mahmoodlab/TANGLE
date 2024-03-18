@@ -13,7 +13,7 @@ Here, we align the slide with its corresponding gene expression profile. The res
 This repository contains the implementation of TANGLE, with step-by-step instructions and data to reproduce results on the TCGA-BRCA (Invasive breast cancer) cohort. 
 
 ### Installation
-<!-- Step-by-step instructions to set up the environment and install necessary dependencies. -->
+<!-- Step-by-step instructions to set up the environment. -->
 
 ```bash
 # Clone repo
@@ -23,9 +23,6 @@ cd TANGLE
 # Create conda env
 conda create -n tangle
 conda activate tangle
-
-# Instal dependencies
-pip install -r requirements.txt
 ```
 
 <!-- Instructions on how to run the code, including preparing data, training models, and evaluating results. -->
