@@ -17,8 +17,8 @@ This repository contains the implementation of TANGLE, with step-by-step instruc
 
 ```bash
 # Clone repo
-git clone https://github.com/your-repository-url.git
-cd your-repository-directory
+git clone [https://github.com/your-repository-url.git](https://github.com/mahmoodlab/TANGLE)
+cd TANGLE
 
 # Create conda env
 conda create -n tangle
