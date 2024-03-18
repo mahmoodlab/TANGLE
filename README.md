@@ -44,7 +44,7 @@ We provide a link to a Drive that includes (1) TCGA-BRCA CTransPath patch embedd
 source scripts/launch_tangle_training.sh
 ```
 
-### Evaluate Tangle
+### Evaluate on TCGA-BRCA
 
 We provide a link to a Drive that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation. Due to patient privacy concerns, we cannot provide the corresponding slide embeddings, but the same script can easily be used for other downstream datasets, such as BRACS, AIDPATH, IMPRESS, BCNB, etc. 
 
