@@ -35,8 +35,9 @@ Preprocessing whole-slide images requires (1) segmenting the tissue, (2) extract
 
 Preprocessing the corresponding gene expression profile can be done in several ways. For the TCGA cohorts, we used normalized RNA sequencing data available [here](https://xenabrowser.net/datapages/?dataset=TCGA.BRCA.sampleMap%2FHiSeqV2_PANCAN&host=https%3A%2F%2Ftcga.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443). A more processed form can be accessed [here](https://github.com/mahmoodlab/SurvPath/blob/main/datasets_csv/raw_rna_data/combine/brca/rna_clean.csv).
 
+### Training on TCGA-BRCA
 
-### Train Tangle
+We provide a link to a Drive that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the correspondings expression profile, and (3) the morphological subtyping labels. These need to be downloaded and moved to the base directory in a new dir called `data`. Due to patient privacy, we cannot upload the downstream MGB cohort. 
 
 ```bash
 # Train Tangle
@@ -44,6 +45,8 @@ source scripts/launch_tangle_training.sh
 ```
 
 ### Evaluate Tangle
+
+We provide a link to a Drive that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation. Due to patient privacy concerns, we cannot provide the corresponding slide embeddings, but the same script can easily be used for other downstream datasets, such as BRACS, AIDPATH, IMPRESS, BCNB, etc. 
 
 ```bash
 # Few-shot evaluation
