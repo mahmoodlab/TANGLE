@@ -1,6 +1,6 @@
 # Code for Transcriptomics-guided Slide Representation Learning in Computational Pathology
 
-Welcome to the official GitHub repository for our CVPR 2024 paper, "Transcriptomics-guided Slide Representation Learning in Computational Pathology". This project was developed by the [Mahmood Lab](https://faisal.ai/) at Harvard Medical School and Brigham and Women's Hospital. 
+Welcome to the official GitHub repository of our CVPR 2024 paper, "Transcriptomics-guided Slide Representation Learning in Computational Pathology". This project was developed by the [Mahmood Lab](https://faisal.ai/) at Harvard Medical School and Brigham and Women's Hospital. 
 
 ![Alt text for the image](support/framework.png "Optional title")
 
