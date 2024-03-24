@@ -37,7 +37,7 @@ Preprocessing the corresponding gene expression profile can be done in several w
 
 ### Training on TCGA-BRCA
 
-To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files, and (3) the morphological subtyping labels. These need to be downloaded and moved to the base directory in a new dir called `data`. Due to patient privacy, we cannot upload the downstream MGB cohort. 
+To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files, and (3) the morphological subtyping labels. These need to be downloaded and moved to the base directory in a new dir called `data`. Due to patient privacy, we cannot upload the downstream in-house MGB cohort. 
 
 To train Tangle, use:
 
@@ -48,7 +48,7 @@ source scripts/launch_tangle_training.sh
 
 ### Evaluate on TCGA-BRCA
 
-We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=sharing) that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation. Due to patient privacy concerns, we cannot provide MGB slide embeddings, but the same script can easily be used for other downstream datasets, such as on BRACS, AIDPATH, IMPRESS, BCNB, etc. 
+We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=sharing) that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation. Due to patient privacy concerns, we cannot provide the in-house MGB slide embeddings, but the same script can easily be used for other downstream datasets, such as on BRACS, AIDPATH, IMPRESS, BCNB, etc. 
 
 To run few-shot evaluation:
 
