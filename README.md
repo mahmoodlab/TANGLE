@@ -62,7 +62,7 @@ source scripts/launch_tangle_evaluation.sh
 - If GitHub issues are inappropriate, email `gjaume@bwh.harvard.edu` (and cc `avaidya@mit.edu`). 
 - Immediate response to minor issues may not be available.
 
-### Citation
+## Citation
 
 If you find our work useful in your research, please consider citing:
 ```
