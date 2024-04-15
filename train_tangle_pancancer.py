@@ -294,9 +294,7 @@ if __name__ == "__main__":
     print("* Setup model...")
     ssl_model = MMSSL(
         config=args,
-        n_tokens_wsi=args["token_size"],
         n_tokens_rna=args["rna_token_dim"] ,
-        patch_embedding_dim=args["embedding_dim"],
     ).to(DEVICE).to(args['dtype']) 
     total_params = sum(p.numel() for p in ssl_model.parameters())
     print("* Total number of parameters = {}".format(total_params))
