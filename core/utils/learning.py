@@ -1,13 +1,26 @@
 # --> General imports
-import os
 import numpy as np
 from numpy.random import MT19937
 from numpy.random import RandomState, SeedSequence
 import torch
 import random
+import pickle
 
 # --> Torch imports 
 import torch
+
+
+def save_pkl(filename, save_object):
+	writer = open(filename,'wb')
+	pickle.dump(save_object, writer)
+	writer.close()
+
+
+def load_pkl(filename):
+	loader = open(filename,'rb')
+	file = pickle.load(loader)
+	loader.close()
+	return file
 
 
 def set_seed(SEED, disable_cudnn=False):
