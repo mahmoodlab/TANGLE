@@ -4,7 +4,6 @@ import time
 import json
 
 from sklearn.utils.class_weight import compute_class_weight
-import pandas as pd
 
 import torch
 from torch.utils.data import DataLoader
@@ -18,7 +17,6 @@ from core.models.mmssl import MMSSL
 from core.dataset.dataset import TangleDataset
 from core.utils.learning import collate_tangle, smooth_rank_measure
 from core.utils.process_args import process_args
-from core.downstream.downstream import extract_downstream_slide_embeddings
 
 import pdb
 
@@ -357,12 +355,3 @@ if __name__ == "__main__":
         else:
             torch.save(ssl_model.state_dict(), os.path.join(RESULS_SAVE_PATH, "model.pt"))
         print()
-
-    # restore the best wsi embedder for testing.  
-    print("* Loading best model...")
-    ssl_model.load_state_dict(torch.load(os.path.join(RESULS_SAVE_PATH, "model.pt")))
-    ssl_model.to(args['dtype'])
-
-    # extract downstream slide embeddings using the freshly trained model
-    extract_downstream_slide_embeddings(args, ssl_model, ROOT_DATA_DIR, RESULS_SAVE_PATH)
-    

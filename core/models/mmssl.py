@@ -24,12 +24,12 @@ class MMSSL(nn.Module):
             assert self.config["n_heads"] == 1, "ABMIL must have only 1 head"
             pre_params = {
                 "input_dim": self.patch_embedding_dim,
-                "hidden_dim": self.config["hidden_dim"],
+                "hidden_dim": self.patch_embedding_dim,
             }
             attention_params = {
                 "model": "ABMIL",
                 "params": {
-                    "input_dim": self.config["hidden_dim"],
+                    "input_dim": self.patch_embedding_dim,
                     "hidden_dim": self.config["hidden_dim"],
                     "dropout": True,
                     "activation": self.config["activation"],

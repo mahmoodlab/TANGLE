@@ -50,13 +50,9 @@ def collate_slide(batch):
         features_batch (torch.Tensor): Batch of feature tensors.
         labels_batch (torch.Tensor): Batch of labels.
     """
-    features_list, labels_list = zip(*batch)
-    
-    # Stack features and labels into batches
+    features_list, ids_list = zip(*batch)
     features_batch = torch.stack(features_list, dim=0)
-    labels_batch = torch.tensor(labels_list, dtype=torch.int64)
-    
-    return features_batch, labels_batch
+    return features_batch, ids_list
 
 
 def smooth_rank_measure(embedding_matrix, eps=1e-7):

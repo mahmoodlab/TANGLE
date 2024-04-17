@@ -5,6 +5,7 @@ import pandas as pd
 import torch
 import pickle
 import random 
+import h5py
 
 # --> Torch imports 
 import torch
@@ -54,32 +55,37 @@ class TangleDataset(Dataset):
         return patch_emb_, rna_data, patch_emb_aug, patch_emb_avg
 
 
+def load_h5(h5_path):
+    with h5py.File(h5_path, 'r') as hdf5_file:
+        feats = hdf5_file['features'][:].squeeze()
+    if isinstance(feats, np.ndarray):
+        feats = torch.Tensor(feats)
+    return feats
+
+
 class SlideDataset(Dataset):
-    def __init__(self, csv_path, features_path):
+    def __init__(self, features_path, extension='.h5'):
         """
         Args:
-            csv_path (string): Path to the csv file with labels and slide_id.
             features_path (string): Directory with all the feature files.
         """
-        self.dataframe = pd.read_csv(csv_path)
         self.features_path = features_path
+        self.extension = extension
+        self.slide_names = [x for x in os.listdir(features_path) if x.endswith(extension)]
+        self.n_slides = len(self.slide_names)
 
     def __len__(self):
-        return len(self.dataframe)
+        return self.n_slides
 
     def __getitem__(self, index):
-        slide_id = self.dataframe.iloc[index, self.dataframe.columns.get_loc('slide_id')]
-        try:
-            feature_file = f"{slide_id}.pt"
-            feature_path = f"{self.features_path}/{feature_file}"
+        slide_id = self.slide_names[index].replace(self.extension, '')
+        feature_file = self.slide_names[index]
+        feature_path = f"{self.features_path}/{feature_file}"
+        if self.extension == '.pt':
             features = torch.load(feature_path)
-            label = self.dataframe.iloc[index, self.dataframe.columns.get_loc('label')]
-        except:
-            print(slide_id, ' not found!! Return dummy values.')
-            features = torch.Tensor([-1])
-            label = torch.Tensor([-1])
-
-        return features, label
+        elif self.extension == '.h5':
+            features = load_h5(feature_path)
+        return features, slide_id
 
 
 class FewShotClassificationDataset:

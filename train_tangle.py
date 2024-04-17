@@ -202,23 +202,7 @@ if __name__ == "__main__":
         n_tokens=args["n_tokens"]
     )
     
-    # in-domain dataset loader for extracting in-domain slide embeddings. 
-    PATH_TO_INDOMAIN_FEATS = "./data/{}/ctranspath_features/tcga_features/".format(args["study"])
-    PATH_TO_INDOMAIN_CSV = "./data/{}/csvs/tcga_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
-    indomain_dataset = SlideDataset(
-        csv_path=PATH_TO_INDOMAIN_CSV, 
-        features_path=PATH_TO_INDOMAIN_FEATS
-    )
-
-    # out-of-domain dataset loader for extracting out-of-domain slide embeddings. 
-    PATH_TO_OUOFDOMAIN_FEATS = "./data/{}/ctranspath_features/mgb_features/".format(args["study"])
-    PATH_TO_OUTOFDOMAIN_CSV = "./data/{}/csvs/op_{}.csv".format(args["study"], 'lung' if args["study"]=='nsclc' else 'brca')
-    outofdomain_dataset = SlideDataset(
-        csv_path=PATH_TO_OUTOFDOMAIN_CSV, 
-        features_path=PATH_TO_OUOFDOMAIN_FEATS
-    )
-    
-    # set up all dataloaders
+    # set up dataloader
     print("* Setup dataloader...")
     dataloader = DataLoader(
         dataset, 
@@ -226,9 +210,7 @@ if __name__ == "__main__":
         shuffle=True, 
         collate_fn=collate_tangle
     )
-    indomain_dataloader = DataLoader(indomain_dataset, batch_size=1, shuffle=False, num_workers=4, collate_fn=collate_slide)
-    outofdomain_dataloader = DataLoader(outofdomain_dataset, batch_size=1, shuffle=False, num_workers=4, collate_fn=collate_slide)
-    
+
     # set up model config, n_tokens_wsi, n_tokens_rna, patch_embedding_dim=768
     print("* Setup model...")
     
@@ -297,21 +279,6 @@ if __name__ == "__main__":
         else:
             torch.save(ssl_model.state_dict(), os.path.join(RESULTS_SAVE_PATH, "model.pt"))
         print()
-    
-    # save the wsi_embedder model 
-    ssl_model.load_state_dict(torch.load(os.path.join(RESULTS_SAVE_PATH, "model.pt")))
-    
-    # get in-domain (tcga here) slide embeddings 
-    print()
-    print("Compute and store TCGA embeddings...")
-    print()
-    tcga_results_dict, val_rank = val_loop(ssl_model, indomain_dataloader)
-    writer.add_scalar("TCGA_val_rank", val_rank)
-    print("Rank = {}".format(val_rank))
-        
-    # save 
-    with open(os.path.join(RESULTS_SAVE_PATH, "tcga_results_dict.pkl"), 'wb') as handle:
-        pickle.dump(tcga_results_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     
     print()
     print("Done")
