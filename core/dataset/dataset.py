@@ -94,17 +94,17 @@ class FewShotClassificationDataset:
     Returns the slide embedding, binary label, and the slide ID.
     """
 
-    def __init__(self, feature_folder_path):
+    def __init__(self, feature_folder_path, csv_path):
         self.feature_folder_path = feature_folder_path
-        self.slide_embeddings, self.labels = self.get_features()
+        self.slide_embeddings = self.get_features()
+        self.labels = pd.read_csv(csv_path)
         
     def get_features(self):
         if os.path.isfile(self.feature_folder_path):
             file = open(self.feature_folder_path, 'rb')
             obj = pickle.load(file)
             embeddings = obj['embeds']
-            labels = obj['labels']
-        return embeddings, labels 
+        return embeddings 
 
     def get_few_shot_binary_datasets(self, k=None):
         

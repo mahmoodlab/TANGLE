@@ -1,6 +1,9 @@
 
 """
-python extract_slide_embeddings_with_pancancer_pretrained_model.py --pretrained results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/pancancer_checkpoints_and_embeddings/tangle_pancancer/
 """
 
 import os
@@ -35,13 +38,13 @@ def read_config(path_to_config):
  
 def restore_model(model, state_dict):
     try:
-        model.load_state_dict(state_dict)
+        model.load_state_dict(state_dict, strict=False)
     except:
         new_state_dict = OrderedDict()
         for k, v in state_dict.items():
             name = k[7:] 
             new_state_dict[name] = v
-        model.load_state_dict(new_state_dict)
+        model.load_state_dict(new_state_dict, strict=False)
 
     return model 
 
@@ -75,4 +78,3 @@ if __name__ == "__main__":
             features_path=val,
             save_fname=os.path.join(args["pretrained"], "{}_results_dict.pkl".format(key)),
         )
-    

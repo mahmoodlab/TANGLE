@@ -4,6 +4,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from einops import rearrange
+import numpy as np
 
 # --> Internal imports 
 from .abmil import BatchedABMIL
@@ -66,32 +67,35 @@ class MMSSL(nn.Module):
 
 
         ########## RNA embedder: Linear or MLP #############
-        if self.config["rna_encoder"] == "linear":
-            self.rna_embedder = nn.Linear(in_features=n_tokens_rna, out_features=self.config["embedding_dim"])
-        else:
-            self.rna_embedder = MLP(input_dim=n_tokens_rna, output_dim=self.config["embedding_dim"])
+        if self.config["rna_encoder"] == "mlp":
+            if self.config["study"] == "pancancer":
+                self.rna_embedder = MLP(input_dim=n_tokens_rna, hidden_dim=self.config["hidden_dim"], output_dim=self.config["hidden_dim"])
+            else:
+                self.rna_embedder = MLP(input_dim=n_tokens_rna, hidden_dim=n_tokens_rna, output_dim=self.config["embedding_dim"])
         
         ########## RNA Reconstruction module: Linear or MLP #############
         if self.config["rna_reconstruction"]:
             if self.config["rna_encoder"] == "linear":
                 self.rna_reconstruction = nn.Linear(in_features=self.config["embedding_dim"], out_features=n_tokens_rna)
             else:
-                self.rna_reconstruction = MLP(input_dim=self.config["embedding_dim"], output_dim=n_tokens_rna)
+                self.rna_reconstruction = MLP(input_dim=self.config["embedding_dim"], hidden_dim=self.config["embedding_dim"], output_dim=n_tokens_rna)
         else:
             self.rna_reconstruction = None
     
         ########## Projection Head #############
-        if self.config["embedding_dim"] != 768:
-            self.proj = ProjHead(input_dim=768, output_dim=self.config["embedding_dim"])
+        if self.config["embedding_dim"] != self.config["hidden_dim"]:
+            self.mean_projector = ProjHead(
+                self.config["embedding_dim"],
+                self.config["hidden_dim"],
+            )
         else:
-            self.proj = None
+            self.mean_projector = None
         
-    def forward(self, wsi_emb, rna_emb=None, token_position_wsi=None):
+    def forward(self, wsi_emb, rna_emb=None):
         
         wsi_emb = self.wsi_embedder(wsi_emb)
-        
-        if self.proj:
-            wsi_emb = self.proj(wsi_emb)
+        # if self.mean_projector:
+        #     wsi_emb = self.mean_projector(wsi_emb)
 
         if self.config["intra_modality_wsi"] or rna_emb is None or self.config['rna_reconstruction']:
             rna_emb = None
@@ -105,12 +109,8 @@ class MMSSL(nn.Module):
 
         return wsi_emb, rna_emb, rna_reconstruction
     
-    def get_features(self, wsi_emb, token_position_wsi=None):
-    
+    def get_features(self, wsi_emb):
         wsi_emb = self.wsi_embedder(wsi_emb)
-        if self.proj:
-            wsi_emb = self.proj(wsi_emb)
-
         return wsi_emb
         
     def get_slide_attention(self, wsi_emb):
@@ -123,16 +123,17 @@ class MMSSL(nn.Module):
         
 
 class MLP(nn.Module):
-    def __init__(self, input_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, output_dim):
         super(MLP, self).__init__()
 
         self.input_dim = input_dim
         self.output_dim = output_dim
 
-        self.blocks=nn.Sequential(self.build_block(in_dim=self.input_dim, out_dim=int(self.input_dim)),
-                                            self.build_block(in_dim=int(self.input_dim), out_dim=int(self.input_dim)),
-                                            nn.Linear(in_features=int(self.input_dim), out_features=self.output_dim),
-                                )
+        self.blocks=nn.Sequential(
+            self.build_block(in_dim=self.input_dim, out_dim=hidden_dim),
+            self.build_block(in_dim=hidden_dim, out_dim=hidden_dim),
+            nn.Linear(in_features=hidden_dim, out_features=self.output_dim),
+        )
         
 
     def build_block(self, in_dim, out_dim):
@@ -151,22 +152,12 @@ class MLP(nn.Module):
 class ProjHead(nn.Module):
     def __init__(self, input_dim, output_dim):
         super(ProjHead, self).__init__()
+        self.layers = nn.Linear(in_features=input_dim, out_features=int(output_dim))
 
-        self.input_dim = input_dim
-        self.output_dim = output_dim
-        
-        self.layers = nn.Sequential(
-                nn.Linear(in_features=self.input_dim, out_features=int(self.input_dim)),
-                nn.LayerNorm(int(self.input_dim)),
-                nn.ReLU(),
-                nn.Dropout(0.2),
-                nn.Linear(in_features=int(self.input_dim) ,out_features=self.output_dim),
-        )
-        
     def forward(self, x):
         x = self.layers(x)
         return x
-    
+
 
 class ABMILEmbedder(nn.Module):
     """
@@ -332,6 +323,7 @@ class ABMILEmbedder_MH(nn.Module):
         Build attention params
         """
         if attn_model == "ABMIL":
+            del params['n_heads']
             self.attn = nn.ModuleList(
                 [BatchedABMIL(**params).to(self.device) for i in range(self.n_heads)]
             )
