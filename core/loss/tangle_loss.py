@@ -140,7 +140,7 @@ class InfoNCE(nn.Module):
             else:
                 loss = F.cross_entropy(logits / temperature, labels, reduction=reduction)
                 
-            return loss
+        return loss
 
     def transpose(self, x):
         return x.transpose(-2, -1)
