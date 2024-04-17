@@ -21,8 +21,9 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def set_args(args, config_from_model):
     exp_code = args['pretrained'].split('/')[-1]
     args['study'] = exp_code.split('_')[0]
-    for key in ['wsi_encoder', 'activation', 'n_heads', 'hidden_dim', 'rna_encoder', 'rna_token_dim', 'embedding_dim', 'downstream_paths']:
+    for key in ['wsi_encoder', 'activation', 'method', 'n_heads', 'hidden_dim', 'rna_encoder', 'rna_token_dim', 'embedding_dim', 'downstream_paths']:
         args[key] = config_from_model[key]
+
     args["rna_reconstruction"] = True if args["method"] == 'tanglerec' else False 
     args["intra_modality_wsi"] = True if args["method"] == 'intra' else False 
     return args 
