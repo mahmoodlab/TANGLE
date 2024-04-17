@@ -1,0 +1,548 @@
+case_id,slide_id,num_ROIs,split,label_coarse,label_fine,diagnosis_fine
+85,BRACS_264,24,Testing,BT,PB,Pathological Benign
+87,BRACS_265,18,Validation,BT,UDH,Usual Ductal Hyperplasia
+30,BRACS_280,19,Training,MT,IC,Invasive Carcinoma
+111,BRACS_281,37,Training,MT,IC,Invasive Carcinoma
+109,BRACS_283,49,Training,MT,IC,Invasive Carcinoma
+16,BRACS_286,37,Testing,MT,IC,Invasive Carcinoma
+101,BRACS_288,12,Training,MT,IC,Invasive Carcinoma
+120,BRACS_291,25,Training,MT,IC,Invasive Carcinoma
+8,BRACS_292,27,Testing,MT,IC,Invasive Carcinoma
+125,BRACS_295,64,Training,MT,IC,Invasive Carcinoma
+114,BRACS_297,31,Training,MT,IC,Invasive Carcinoma
+113,BRACS_298,8,Training,MT,IC,Invasive Carcinoma
+130,BRACS_300,15,Testing,AT,FEA,Flat Epithelial Atypia
+10,BRACS_301,19,Testing,MT,IC,Invasive Carcinoma
+110,BRACS_305,11,Testing,MT,IC,Invasive Carcinoma
+4,BRACS_310,12,Testing,MT,IC,Invasive Carcinoma
+7,BRACS_311,81,Training,MT,IC,Invasive Carcinoma
+84,BRACS_734,104,Training,MT,IC,Invasive Carcinoma
+89,BRACS_735,9,Validation,MT,DCIS,Ductal Carcinoma in Situ
+89,BRACS_736,12,Validation,MT,DCIS,Ductal Carcinoma in Situ
+89,BRACS_737,4,Validation,MT,DCIS,Ductal Carcinoma in Situ
+90,BRACS_738,33,Validation,MT,IC,Invasive Carcinoma
+90,BRACS_739,38,Validation,MT,IC,Invasive Carcinoma
+90,BRACS_740,22,Validation,MT,IC,Invasive Carcinoma
+102,BRACS_743,28,Training,AT,FEA,Flat Epithelial Atypia
+104,BRACS_745,22,Training,BT,PB,Pathological Benign
+104,BRACS_747,66,Training,MT,IC,Invasive Carcinoma
+105,BRACS_748,98,Training,MT,IC,Invasive Carcinoma
+105,BRACS_749,14,Training,MT,IC,Invasive Carcinoma
+105,BRACS_750,37,Training,MT,IC,Invasive Carcinoma
+105,BRACS_752,43,Training,MT,IC,Invasive Carcinoma
+105,BRACS_753,44,Training,MT,IC,Invasive Carcinoma
+105,BRACS_754,52,Training,MT,IC,Invasive Carcinoma
+105,BRACS_755,31,Training,MT,DCIS,Ductal Carcinoma in Situ
+105,BRACS_756,11,Training,MT,IC,Invasive Carcinoma
+106,BRACS_757,5,Training,MT,IC,Invasive Carcinoma
+106,BRACS_758,3,Training,BT,PB,Pathological Benign
+106,BRACS_759,12,Training,MT,IC,Invasive Carcinoma
+106,BRACS_760,18,Training,BT,PB,Pathological Benign
+106,BRACS_761,5,Training,BT,PB,Pathological Benign
+106,BRACS_762,16,Training,MT,DCIS,Ductal Carcinoma in Situ
+144,BRACS_773,119,Training,MT,IC,Invasive Carcinoma
+23,BRACS_1228,10,Testing,AT,ADH,Atypical Ductal Hyperplasia
+141,BRACS_1231,63,Training,MT,IC,Invasive Carcinoma
+144,BRACS_1232,12,Training,MT,IC,Invasive Carcinoma
+144,BRACS_1233,5,Training,MT,IC,Invasive Carcinoma
+143,BRACS_1235,43,Training,MT,IC,Invasive Carcinoma
+143,BRACS_1238,59,Training,MT,DCIS,Ductal Carcinoma in Situ
+136,BRACS_1239,7,Training,AT,FEA,Flat Epithelial Atypia
+137,BRACS_1240,13,Training,BT,PB,Pathological Benign
+137,BRACS_1241,10,Training,BT,PB,Pathological Benign
+137,BRACS_1242,5,Training,BT,PB,Pathological Benign
+139,BRACS_1244,2,Training,BT,UDH,Usual Ductal Hyperplasia
+29,BRACS_1247,53,Training,MT,DCIS,Ductal Carcinoma in Situ
+26,BRACS_1248,0,Training,BT,PB,Pathological Benign
+91,BRACS_1249,0,Training,BT,PB,Pathological Benign
+138,BRACS_1250,5,Training,AT,FEA,Flat Epithelial Atypia
+138,BRACS_1251,5,Training,BT,PB,Pathological Benign
+135,BRACS_1253,5,Training,BT,PB,Pathological Benign
+136,BRACS_1255,5,Training,BT,PB,Pathological Benign
+136,BRACS_1257,5,Training,AT,FEA,Flat Epithelial Atypia
+136,BRACS_1259,5,Training,BT,PB,Pathological Benign
+145,BRACS_1261,0,Validation,BT,N,Normal
+99,BRACS_1263,5,Training,MT,IC,Invasive Carcinoma
+99,BRACS_1265,9,Training,MT,IC,Invasive Carcinoma
+28,BRACS_1267,0,Training,BT,N,Normal
+28,BRACS_1269,0,Training,BT,N,Normal
+28,BRACS_1270,4,Training,BT,UDH,Usual Ductal Hyperplasia
+27,BRACS_1271,16,Validation,AT,ADH,Atypical Ductal Hyperplasia
+24,BRACS_1272,46,Training,MT,IC,Invasive Carcinoma
+21,BRACS_1273,0,Training,BT,PB,Pathological Benign
+21,BRACS_1274,0,Training,BT,PB,Pathological Benign
+25,BRACS_1275,0,Validation,BT,PB,Pathological Benign
+25,BRACS_1276,0,Validation,BT,PB,Pathological Benign
+22,BRACS_1277,1,Training,MT,IC,Invasive Carcinoma
+22,BRACS_1279,4,Training,MT,IC,Invasive Carcinoma
+23,BRACS_1283,12,Testing,MT,DCIS,Ductal Carcinoma in Situ
+23,BRACS_1284,16,Testing,MT,IC,Invasive Carcinoma
+23,BRACS_1286,45,Testing,MT,IC,Invasive Carcinoma
+18,BRACS_1287,7,Training,MT,IC,Invasive Carcinoma
+19,BRACS_1288,9,Training,MT,IC,Invasive Carcinoma
+19,BRACS_1289,9,Training,MT,IC,Invasive Carcinoma
+19,BRACS_1292,13,Training,MT,IC,Invasive Carcinoma
+19,BRACS_1293,7,Training,MT,IC,Invasive Carcinoma
+20,BRACS_1295,5,Validation,BT,UDH,Usual Ductal Hyperplasia
+20,BRACS_1296,3,Validation,BT,N,Normal
+31,BRACS_1318,10,Training,BT,PB,Pathological Benign
+31,BRACS_1319,20,Training,AT,FEA,Flat Epithelial Atypia
+31,BRACS_1320,20,Training,BT,PB,Pathological Benign
+32,BRACS_1321,10,Training,BT,PB,Pathological Benign
+32,BRACS_1322,5,Training,BT,PB,Pathological Benign
+32,BRACS_1324,10,Training,BT,PB,Pathological Benign
+33,BRACS_1325,14,Training,BT,PB,Pathological Benign
+33,BRACS_1326,12,Training,BT,UDH,Usual Ductal Hyperplasia
+33,BRACS_1327,15,Training,BT,PB,Pathological Benign
+34,BRACS_1329,5,Training,BT,PB,Pathological Benign
+35,BRACS_1330,4,Testing,BT,PB,Pathological Benign
+35,BRACS_1334,5,Testing,BT,UDH,Usual Ductal Hyperplasia
+36,BRACS_1335,5,Training,BT,UDH,Usual Ductal Hyperplasia
+36,BRACS_1336,5,Training,BT,PB,Pathological Benign
+36,BRACS_1337,5,Training,BT,UDH,Usual Ductal Hyperplasia
+36,BRACS_1338,3,Training,BT,PB,Pathological Benign
+149,BRACS_1356,5,Training,MT,IC,Invasive Carcinoma
+149,BRACS_1357,3,Training,MT,IC,Invasive Carcinoma
+149,BRACS_1358,3,Training,MT,IC,Invasive Carcinoma
+149,BRACS_1360,5,Training,MT,IC,Invasive Carcinoma
+11,BRACS_1361,5,Validation,MT,IC,Invasive Carcinoma
+11,BRACS_1362,1,Validation,MT,IC,Invasive Carcinoma
+11,BRACS_1366,9,Validation,MT,DCIS,Ductal Carcinoma in Situ
+11,BRACS_1367,2,Validation,MT,DCIS,Ductal Carcinoma in Situ
+11,BRACS_1368,6,Validation,MT,IC,Invasive Carcinoma
+84,BRACS_1369,4,Training,MT,DCIS,Ductal Carcinoma in Situ
+84,BRACS_1370,5,Training,BT,PB,Pathological Benign
+167,BRACS_1374,0,Training,MT,IC,Invasive Carcinoma
+167,BRACS_1378,0,Training,BT,N,Normal
+106,BRACS_1379,0,Training,AT,ADH,Atypical Ductal Hyperplasia
+168,BRACS_1385,0,Training,BT,N,Normal
+142,BRACS_1386,0,Training,BT,N,Normal
+37,BRACS_1392,5,Validation,MT,IC,Invasive Carcinoma
+37,BRACS_1393,0,Validation,MT,IC,Invasive Carcinoma
+37,BRACS_1394,5,Validation,MT,IC,Invasive Carcinoma
+37,BRACS_1395,6,Validation,MT,IC,Invasive Carcinoma
+38,BRACS_1401,0,Training,BT,N,Normal
+38,BRACS_1403,0,Training,BT,N,Normal
+38,BRACS_1404,0,Training,BT,N,Normal
+38,BRACS_1405,0,Training,BT,N,Normal
+39,BRACS_1406,5,Training,MT,IC,Invasive Carcinoma
+39,BRACS_1407,4,Training,MT,IC,Invasive Carcinoma
+39,BRACS_1408,0,Training,BT,PB,Pathological Benign
+39,BRACS_1409,12,Training,BT,UDH,Usual Ductal Hyperplasia
+40,BRACS_1411,0,Testing,MT,IC,Invasive Carcinoma
+40,BRACS_1412,0,Testing,BT,PB,Pathological Benign
+40,BRACS_1413,5,Testing,MT,IC,Invasive Carcinoma
+40,BRACS_1414,0,Testing,MT,IC,Invasive Carcinoma
+41,BRACS_1416,3,Testing,BT,UDH,Usual Ductal Hyperplasia
+42,BRACS_1423,0,Validation,BT,PB,Pathological Benign
+42,BRACS_1424,0,Validation,BT,PB,Pathological Benign
+46,BRACS_1473,0,Testing,MT,DCIS,Ductal Carcinoma in Situ
+46,BRACS_1474,0,Testing,MT,DCIS,Ductal Carcinoma in Situ
+46,BRACS_1476,21,Testing,MT,DCIS,Ductal Carcinoma in Situ
+52,BRACS_1477,12,Training,MT,IC,Invasive Carcinoma
+52,BRACS_1478,38,Training,MT,IC,Invasive Carcinoma
+50,BRACS_1480,2,Training,BT,PB,Pathological Benign
+51,BRACS_1483,2,Training,BT,PB,Pathological Benign
+51,BRACS_1484,52,Training,MT,IC,Invasive Carcinoma
+51,BRACS_1485,7,Training,BT,PB,Pathological Benign
+51,BRACS_1486,13,Training,AT,ADH,Atypical Ductal Hyperplasia
+51,BRACS_1487,37,Training,MT,IC,Invasive Carcinoma
+47,BRACS_1489,18,Training,MT,DCIS,Ductal Carcinoma in Situ
+47,BRACS_1490,11,Training,MT,DCIS,Ductal Carcinoma in Situ
+47,BRACS_1491,38,Training,MT,DCIS,Ductal Carcinoma in Situ
+47,BRACS_1492,10,Training,MT,DCIS,Ductal Carcinoma in Situ
+47,BRACS_1493,7,Training,BT,PB,Pathological Benign
+49,BRACS_1494,55,Training,AT,ADH,Atypical Ductal Hyperplasia
+49,BRACS_1495,0,Training,BT,UDH,Usual Ductal Hyperplasia
+49,BRACS_1496,49,Training,MT,DCIS,Ductal Carcinoma in Situ
+49,BRACS_1497,22,Training,MT,DCIS,Ductal Carcinoma in Situ
+49,BRACS_1498,5,Training,BT,UDH,Usual Ductal Hyperplasia
+49,BRACS_1499,12,Training,AT,ADH,Atypical Ductal Hyperplasia
+53,BRACS_1503,17,Testing,AT,ADH,Atypical Ductal Hyperplasia
+54,BRACS_1506,11,Training,AT,FEA,Flat Epithelial Atypia
+54,BRACS_1507,10,Training,BT,N,Normal
+54,BRACS_1508,4,Training,BT,PB,Pathological Benign
+54,BRACS_1509,23,Training,MT,DCIS,Ductal Carcinoma in Situ
+54,BRACS_1510,23,Training,AT,FEA,Flat Epithelial Atypia
+48,BRACS_1511,3,Training,BT,PB,Pathological Benign
+48,BRACS_1512,25,Training,MT,DCIS,Ductal Carcinoma in Situ
+48,BRACS_1513,0,Training,BT,N,Normal
+48,BRACS_1514,0,Training,MT,DCIS,Ductal Carcinoma in Situ
+48,BRACS_1515,0,Training,MT,DCIS,Ductal Carcinoma in Situ
+158,BRACS_1516,0,Training,MT,IC,Invasive Carcinoma
+45,BRACS_1578,0,Testing,MT,IC,Invasive Carcinoma
+45,BRACS_1579,0,Testing,BT,N,Normal
+45,BRACS_1580,14,Testing,MT,IC,Invasive Carcinoma
+55,BRACS_1581,5,Training,BT,UDH,Usual Ductal Hyperplasia
+55,BRACS_1582,3,Training,BT,PB,Pathological Benign
+55,BRACS_1583,1,Training,BT,PB,Pathological Benign
+56,BRACS_1584,2,Validation,BT,N,Normal
+56,BRACS_1585,2,Validation,BT,N,Normal
+57,BRACS_1587,3,Testing,MT,IC,Invasive Carcinoma
+57,BRACS_1588,0,Testing,MT,DCIS,Ductal Carcinoma in Situ
+57,BRACS_1589,10,Testing,AT,ADH,Atypical Ductal Hyperplasia
+57,BRACS_1590,3,Testing,MT,IC,Invasive Carcinoma
+58,BRACS_1591,6,Validation,BT,UDH,Usual Ductal Hyperplasia
+58,BRACS_1592,2,Validation,BT,UDH,Usual Ductal Hyperplasia
+59,BRACS_1593,4,Training,BT,PB,Pathological Benign
+59,BRACS_1594,8,Training,BT,UDH,Usual Ductal Hyperplasia
+60,BRACS_1595,13,Validation,BT,UDH,Usual Ductal Hyperplasia
+61,BRACS_1596,8,Training,BT,UDH,Usual Ductal Hyperplasia
+62,BRACS_1597,8,Testing,MT,DCIS,Ductal Carcinoma in Situ
+62,BRACS_1598,5,Testing,BT,N,Normal
+62,BRACS_1599,2,Testing,BT,N,Normal
+62,BRACS_1601,2,Testing,BT,N,Normal
+62,BRACS_1602,12,Testing,MT,DCIS,Ductal Carcinoma in Situ
+63,BRACS_1603,13,Training,BT,PB,Pathological Benign
+63,BRACS_1604,14,Training,BT,UDH,Usual Ductal Hyperplasia
+64,BRACS_1605,20,Training,BT,PB,Pathological Benign
+64,BRACS_1606,15,Training,BT,UDH,Usual Ductal Hyperplasia
+65,BRACS_1607,15,Validation,MT,DCIS,Ductal Carcinoma in Situ
+65,BRACS_1608,5,Validation,BT,PB,Pathological Benign
+65,BRACS_1609,4,Validation,BT,UDH,Usual Ductal Hyperplasia
+65,BRACS_1610,13,Validation,AT,FEA,Flat Epithelial Atypia
+66,BRACS_1612,10,Training,BT,PB,Pathological Benign
+67,BRACS_1614,0,Validation,BT,N,Normal
+44,BRACS_1616,6,Training,AT,ADH,Atypical Ductal Hyperplasia
+44,BRACS_1617,16,Training,BT,UDH,Usual Ductal Hyperplasia
+44,BRACS_1618,13,Training,BT,UDH,Usual Ductal Hyperplasia
+43,BRACS_1619,5,Testing,BT,UDH,Usual Ductal Hyperplasia
+44,BRACS_1620,3,Training,BT,PB,Pathological Benign
+44,BRACS_1621,2,Training,BT,UDH,Usual Ductal Hyperplasia
+44,BRACS_1622,12,Training,AT,ADH,Atypical Ductal Hyperplasia
+67,BRACS_1631,10,Training,BT,PB,Pathological Benign
+67,BRACS_1632,0,Validation,BT,N,Normal
+67,BRACS_1633,4,Training,BT,PB,Pathological Benign
+67,BRACS_1634,4,Training,BT,PB,Pathological Benign
+69,BRACS_1635,13,Training,MT,IC,Invasive Carcinoma
+69,BRACS_1636,14,Training,MT,IC,Invasive Carcinoma
+69,BRACS_1637,20,Training,MT,IC,Invasive Carcinoma
+69,BRACS_1638,17,Training,MT,IC,Invasive Carcinoma
+69,BRACS_1639,9,Training,MT,IC,Invasive Carcinoma
+69,BRACS_1640,9,Training,BT,PB,Pathological Benign
+69,BRACS_1641,4,Training,BT,N,Normal
+69,BRACS_1642,7,Training,BT,UDH,Usual Ductal Hyperplasia
+69,BRACS_1643,16,Training,MT,IC,Invasive Carcinoma
+70,BRACS_1645,1,Training,BT,N,Normal
+70,BRACS_1646,16,Training,MT,IC,Invasive Carcinoma
+70,BRACS_1647,12,Training,MT,IC,Invasive Carcinoma
+70,BRACS_1648,3,Training,MT,IC,Invasive Carcinoma
+70,BRACS_1649,5,Training,MT,IC,Invasive Carcinoma
+71,BRACS_1650,5,Training,MT,IC,Invasive Carcinoma
+71,BRACS_1652,0,Training,MT,IC,Invasive Carcinoma
+71,BRACS_1653,0,Training,MT,DCIS,Ductal Carcinoma in Situ
+71,BRACS_1654,5,Training,MT,IC,Invasive Carcinoma
+72,BRACS_1655,0,Training,BT,PB,Pathological Benign
+72,BRACS_1656,0,Training,BT,PB,Pathological Benign
+72,BRACS_1658,0,Training,BT,N,Normal
+72,BRACS_1659,0,Training,BT,PB,Pathological Benign
+72,BRACS_1660,0,Training,BT,PB,Pathological Benign
+72,BRACS_1661,0,Training,BT,PB,Pathological Benign
+73,BRACS_1664,0,Training,BT,PB,Pathological Benign
+73,BRACS_1665,0,Training,BT,PB,Pathological Benign
+74,BRACS_1666,0,Training,BT,PB,Pathological Benign
+74,BRACS_1667,2,Training,BT,UDH,Usual Ductal Hyperplasia
+160,BRACS_1668,0,Training,BT,PB,Pathological Benign
+160,BRACS_1669,0,Training,BT,PB,Pathological Benign
+103,BRACS_1771,105,Training,MT,DCIS,Ductal Carcinoma in Situ
+98,BRACS_1772,7,Training,BT,PB,Pathological Benign
+98,BRACS_1773,16,Training,AT,FEA,Flat Epithelial Atypia
+98,BRACS_1774,12,Training,AT,FEA,Flat Epithelial Atypia
+98,BRACS_1775,6,Training,AT,FEA,Flat Epithelial Atypia
+98,BRACS_1777,6,Training,AT,FEA,Flat Epithelial Atypia
+98,BRACS_1778,5,Training,AT,FEA,Flat Epithelial Atypia
+98,BRACS_1779,17,Training,BT,PB,Pathological Benign
+98,BRACS_1780,14,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1782,7,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1783,10,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1784,0,Training,BT,PB,Pathological Benign
+107,BRACS_1785,1,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1786,4,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1787,4,Training,BT,UDH,Usual Ductal Hyperplasia
+107,BRACS_1788,5,Training,AT,FEA,Flat Epithelial Atypia
+107,BRACS_1789,5,Training,BT,UDH,Usual Ductal Hyperplasia
+122,BRACS_1791,11,Training,BT,UDH,Usual Ductal Hyperplasia
+122,BRACS_1792,5,Training,BT,UDH,Usual Ductal Hyperplasia
+122,BRACS_1793,2,Training,BT,UDH,Usual Ductal Hyperplasia
+122,BRACS_1794,5,Training,AT,ADH,Atypical Ductal Hyperplasia
+122,BRACS_1795,63,Training,AT,ADH,Atypical Ductal Hyperplasia
+122,BRACS_1796,0,Training,BT,PB,Pathological Benign
+9,BRACS_1797,4,Validation,AT,ADH,Atypical Ductal Hyperplasia
+9,BRACS_1798,4,Validation,MT,IC,Invasive Carcinoma
+9,BRACS_1799,0,Validation,AT,FEA,Flat Epithelial Atypia
+150,BRACS_1808,97,Training,AT,ADH,Atypical Ductal Hyperplasia
+150,BRACS_1810,67,Training,MT,IC,Invasive Carcinoma
+150,BRACS_1811,38,Training,MT,DCIS,Ductal Carcinoma in Situ
+150,BRACS_1812,9,Training,MT,IC,Invasive Carcinoma
+94,BRACS_1813,2,Testing,AT,FEA,Flat Epithelial Atypia
+93,BRACS_1814,3,Testing,AT,FEA,Flat Epithelial Atypia
+88,BRACS_1815,6,Training,AT,FEA,Flat Epithelial Atypia
+88,BRACS_1816,2,Training,MT,DCIS,Ductal Carcinoma in Situ
+13,BRACS_1817,4,Testing,MT,IC,Invasive Carcinoma
+13,BRACS_1820,0,Testing,BT,N,Normal
+13,BRACS_1821,2,Testing,BT,UDH,Usual Ductal Hyperplasia
+13,BRACS_1823,4,Testing,MT,IC,Invasive Carcinoma
+13,BRACS_1824,2,Testing,BT,UDH,Usual Ductal Hyperplasia
+13,BRACS_1825,2,Testing,AT,ADH,Atypical Ductal Hyperplasia
+13,BRACS_1826,3,Testing,MT,IC,Invasive Carcinoma
+140,BRACS_1827,9,Training,MT,IC,Invasive Carcinoma
+140,BRACS_1828,3,Training,MT,IC,Invasive Carcinoma
+140,BRACS_1829,5,Training,MT,IC,Invasive Carcinoma
+140,BRACS_1830,9,Training,MT,IC,Invasive Carcinoma
+140,BRACS_1831,3,Training,MT,IC,Invasive Carcinoma
+97,BRACS_1832,0,Training,BT,PB,Pathological Benign
+97,BRACS_1833,0,Training,BT,PB,Pathological Benign
+97,BRACS_1834,0,Training,BT,UDH,Usual Ductal Hyperplasia
+97,BRACS_1835,2,Training,MT,DCIS,Ductal Carcinoma in Situ
+97,BRACS_1836,0,Training,BT,UDH,Usual Ductal Hyperplasia
+97,BRACS_1837,1,Training,BT,UDH,Usual Ductal Hyperplasia
+97,BRACS_1838,5,Training,AT,FEA,Flat Epithelial Atypia
+97,BRACS_1839,0,Training,BT,PB,Pathological Benign
+97,BRACS_1840,2,Training,MT,DCIS,Ductal Carcinoma in Situ
+97,BRACS_1841,0,Training,BT,PB,Pathological Benign
+100,BRACS_1842,0,Testing,BT,PB,Pathological Benign
+100,BRACS_1843,0,Testing,BT,PB,Pathological Benign
+100,BRACS_1844,2,Testing,AT,ADH,Atypical Ductal Hyperplasia
+100,BRACS_1845,0,Testing,BT,PB,Pathological Benign
+100,BRACS_1846,0,Testing,BT,PB,Pathological Benign
+100,BRACS_1847,0,Testing,BT,PB,Pathological Benign
+100,BRACS_1848,2,Testing,BT,UDH,Usual Ductal Hyperplasia
+100,BRACS_1849,5,Testing,AT,ADH,Atypical Ductal Hyperplasia
+100,BRACS_1850,4,Testing,BT,PB,Pathological Benign
+100,BRACS_1851,2,Testing,BT,PB,Pathological Benign
+100,BRACS_1852,4,Testing,BT,PB,Pathological Benign
+100,BRACS_1853,4,Testing,BT,UDH,Usual Ductal Hyperplasia
+100,BRACS_1855,2,Testing,BT,N,Normal
+100,BRACS_1856,5,Testing,AT,ADH,Atypical Ductal Hyperplasia
+121,BRACS_1857,6,Training,AT,FEA,Flat Epithelial Atypia
+97,BRACS_1858,6,Training,AT,FEA,Flat Epithelial Atypia
+3,BRACS_1860,13,Training,AT,ADH,Atypical Ductal Hyperplasia
+3,BRACS_1861,10,Training,AT,ADH,Atypical Ductal Hyperplasia
+3,BRACS_1862,16,Training,MT,DCIS,Ductal Carcinoma in Situ
+3,BRACS_1863,12,Training,AT,ADH,Atypical Ductal Hyperplasia
+3,BRACS_1864,19,Training,MT,DCIS,Ductal Carcinoma in Situ
+3,BRACS_1865,10,Training,AT,FEA,Flat Epithelial Atypia
+3,BRACS_1866,3,Training,BT,PB,Pathological Benign
+133,BRACS_1867,0,Testing,MT,DCIS,Ductal Carcinoma in Situ
+123,BRACS_1869,2,Training,BT,PB,Pathological Benign
+68,BRACS_1870,2,Testing,BT,PB,Pathological Benign
+92,BRACS_1871,7,Training,AT,FEA,Flat Epithelial Atypia
+68,BRACS_1872,4,Testing,MT,DCIS,Ductal Carcinoma in Situ
+92,BRACS_1873,3,Training,BT,UDH,Usual Ductal Hyperplasia
+92,BRACS_1874,6,Training,MT,DCIS,Ductal Carcinoma in Situ
+92,BRACS_1875,10,Training,MT,IC,Invasive Carcinoma
+124,BRACS_1876,8,Validation,AT,ADH,Atypical Ductal Hyperplasia
+92,BRACS_1877,23,Training,AT,ADH,Atypical Ductal Hyperplasia
+133,BRACS_1878,8,Testing,MT,DCIS,Ductal Carcinoma in Situ
+129,BRACS_1879,5,Training,BT,PB,Pathological Benign
+123,BRACS_1880,2,Training,BT,PB,Pathological Benign
+123,BRACS_1881,15,Training,BT,UDH,Usual Ductal Hyperplasia
+123,BRACS_1882,5,Training,AT,ADH,Atypical Ductal Hyperplasia
+124,BRACS_1883,1,Validation,MT,DCIS,Ductal Carcinoma in Situ
+124,BRACS_1885,4,Validation,AT,ADH,Atypical Ductal Hyperplasia
+124,BRACS_1886,10,Validation,AT,FEA,Flat Epithelial Atypia
+92,BRACS_1888,18,Training,MT,DCIS,Ductal Carcinoma in Situ
+123,BRACS_1890,11,Training,BT,PB,Pathological Benign
+152,BRACS_1892,2,Testing,AT,ADH,Atypical Ductal Hyperplasia
+129,BRACS_1893,3,Training,BT,PB,Pathological Benign
+112,BRACS_1895,3,Testing,AT,ADH,Atypical Ductal Hyperplasia
+112,BRACS_1896,4,Testing,BT,UDH,Usual Ductal Hyperplasia
+112,BRACS_1897,7,Testing,MT,DCIS,Ductal Carcinoma in Situ
+132,BRACS_1899,13,Training,AT,ADH,Atypical Ductal Hyperplasia
+132,BRACS_1900,6,Training,BT,PB,Pathological Benign
+132,BRACS_1901,11,Training,BT,PB,Pathological Benign
+132,BRACS_1902,9,Training,BT,PB,Pathological Benign
+132,BRACS_1903,13,Training,MT,DCIS,Ductal Carcinoma in Situ
+132,BRACS_1904,5,Training,BT,PB,Pathological Benign
+132,BRACS_1905,3,Training,BT,PB,Pathological Benign
+86,BRACS_1906,1,Testing,BT,PB,Pathological Benign
+86,BRACS_1908,6,Testing,MT,IC,Invasive Carcinoma
+86,BRACS_1910,3,Testing,MT,IC,Invasive Carcinoma
+52,BRACS_1911,7,Training,AT,ADH,Atypical Ductal Hyperplasia
+52,BRACS_1912,8,Training,AT,ADH,Atypical Ductal Hyperplasia
+14,BRACS_1913,7,Training,AT,ADH,Atypical Ductal Hyperplasia
+14,BRACS_1914,4,Training,BT,UDH,Usual Ductal Hyperplasia
+14,BRACS_1915,4,Training,AT,ADH,Atypical Ductal Hyperplasia
+14,BRACS_1916,9,Training,AT,FEA,Flat Epithelial Atypia
+14,BRACS_1917,3,Training,BT,UDH,Usual Ductal Hyperplasia
+14,BRACS_1918,11,Training,BT,UDH,Usual Ductal Hyperplasia
+12,BRACS_1919,8,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1920,7,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1921,6,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1922,9,Training,AT,ADH,Atypical Ductal Hyperplasia
+12,BRACS_1923,16,Training,MT,DCIS,Ductal Carcinoma in Situ
+14,BRACS_1924,0,Training,BT,PB,Pathological Benign
+14,BRACS_1925,7,Training,AT,ADH,Atypical Ductal Hyperplasia
+14,BRACS_1926,5,Training,AT,FEA,Flat Epithelial Atypia
+12,BRACS_1927,8,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1928,6,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1929,8,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1930,21,Training,MT,DCIS,Ductal Carcinoma in Situ
+12,BRACS_1931,12,Training,MT,DCIS,Ductal Carcinoma in Situ
+3,BRACS_1932,7,Training,AT,ADH,Atypical Ductal Hyperplasia
+3,BRACS_1933,16,Training,AT,ADH,Atypical Ductal Hyperplasia
+3,BRACS_1934,16,Training,AT,ADH,Atypical Ductal Hyperplasia
+108,BRACS_1935,6,Validation,MT,DCIS,Ductal Carcinoma in Situ
+68,BRACS_1936,4,Testing,AT,FEA,Flat Epithelial Atypia
+68,BRACS_1937,15,Testing,AT,FEA,Flat Epithelial Atypia
+133,BRACS_1938,9,Testing,AT,ADH,Atypical Ductal Hyperplasia
+133,BRACS_1940,2,Testing,BT,PB,Pathological Benign
+133,BRACS_1941,19,Testing,AT,FEA,Flat Epithelial Atypia
+133,BRACS_1942,3,Testing,BT,PB,Pathological Benign
+133,BRACS_1943,23,Testing,AT,FEA,Flat Epithelial Atypia
+133,BRACS_1944,5,Testing,AT,FEA,Flat Epithelial Atypia
+148,BRACS_1945,23,Testing,MT,DCIS,Ductal Carcinoma in Situ
+151,BRACS_1946,18,Training,BT,UDH,Usual Ductal Hyperplasia
+151,BRACS_1947,13,Training,MT,DCIS,Ductal Carcinoma in Situ
+151,BRACS_1948,7,Training,BT,PB,Pathological Benign
+1,BRACS_1949,3,Training,BT,UDH,Usual Ductal Hyperplasia
+92,BRACS_1950,33,Training,MT,DCIS,Ductal Carcinoma in Situ
+148,BRACS_1952,6,Testing,BT,UDH,Usual Ductal Hyperplasia
+146,BRACS_1953,12,Validation,AT,ADH,Atypical Ductal Hyperplasia
+148,BRACS_1954,6,Testing,AT,FEA,Flat Epithelial Atypia
+148,BRACS_1955,4,Testing,AT,FEA,Flat Epithelial Atypia
+147,BRACS_1957,0,Training,BT,UDH,Usual Ductal Hyperplasia
+147,BRACS_1958,0,Training,BT,UDH,Usual Ductal Hyperplasia
+147,BRACS_1959,0,Training,BT,UDH,Usual Ductal Hyperplasia
+131,BRACS_1960,0,Training,BT,PB,Pathological Benign
+131,BRACS_1961,0,Training,BT,PB,Pathological Benign
+96,BRACS_1962,0,Training,BT,PB,Pathological Benign
+96,BRACS_1963,0,Training,BT,UDH,Usual Ductal Hyperplasia
+96,BRACS_1964,0,Training,BT,PB,Pathological Benign
+17,BRACS_1965,0,Training,BT,PB,Pathological Benign
+17,BRACS_1966,0,Training,BT,PB,Pathological Benign
+17,BRACS_1967,0,Training,BT,PB,Pathological Benign
+92,BRACS_1968,0,Training,AT,FEA,Flat Epithelial Atypia
+92,BRACS_1969,0,Training,AT,ADH,Atypical Ductal Hyperplasia
+92,BRACS_1970,0,Training,MT,DCIS,Ductal Carcinoma in Situ
+92,BRACS_1971,0,Training,AT,FEA,Flat Epithelial Atypia
+6,BRACS_1972,0,Training,BT,PB,Pathological Benign
+6,BRACS_1973,0,Training,BT,N,Normal
+5,BRACS_1974,0,Validation,BT,N,Normal
+5,BRACS_1975,0,Validation,AT,FEA,Flat Epithelial Atypia
+5,BRACS_1977,0,Validation,AT,ADH,Atypical Ductal Hyperplasia
+5,BRACS_1978,0,Validation,BT,N,Normal
+5,BRACS_1979,0,Validation,BT,N,Normal
+5,BRACS_1980,0,Validation,BT,PB,Pathological Benign
+5,BRACS_1981,0,Validation,BT,N,Normal
+2,BRACS_1982,0,Validation,AT,ADH,Atypical Ductal Hyperplasia
+2,BRACS_1983,0,Validation,AT,ADH,Atypical Ductal Hyperplasia
+1,BRACS_1984,0,Training,MT,IC,Invasive Carcinoma
+1,BRACS_1986,0,Training,BT,PB,Pathological Benign
+1,BRACS_1987,0,Training,AT,ADH,Atypical Ductal Hyperplasia
+1,BRACS_1988,0,Training,BT,PB,Pathological Benign
+1,BRACS_1989,0,Training,BT,PB,Pathological Benign
+95,BRACS_1993,0,Training,BT,UDH,Usual Ductal Hyperplasia
+95,BRACS_1994,0,Training,BT,PB,Pathological Benign
+95,BRACS_1995,0,Training,BT,UDH,Usual Ductal Hyperplasia
+95,BRACS_1996,0,Training,BT,UDH,Usual Ductal Hyperplasia
+95,BRACS_1997,0,Training,BT,UDH,Usual Ductal Hyperplasia
+95,BRACS_1998,0,Training,BT,N,Normal
+95,BRACS_1999,0,Training,MT,DCIS,Ductal Carcinoma in Situ
+95,BRACS_2000,0,Training,BT,PB,Pathological Benign
+95,BRACS_2001,0,Training,BT,UDH,Usual Ductal Hyperplasia
+95,BRACS_2002,0,Training,BT,PB,Pathological Benign
+131,BRACS_2004,0,Training,BT,PB,Pathological Benign
+131,BRACS_2005,0,Training,BT,UDH,Usual Ductal Hyperplasia
+15,BRACS_2007,0,Testing,AT,FEA,Flat Epithelial Atypia
+80,BRACS_3266,0,Validation,AT,FEA,Flat Epithelial Atypia
+75,BRACS_3268,0,Training,BT,PB,Pathological Benign
+75,BRACS_3269,0,Training,BT,PB,Pathological Benign
+75,BRACS_3270,0,Training,BT,PB,Pathological Benign
+75,BRACS_3271,0,Training,BT,PB,Pathological Benign
+76,BRACS_3272,0,Training,BT,PB,Pathological Benign
+76,BRACS_3273,0,Training,BT,UDH,Usual Ductal Hyperplasia
+77,BRACS_3274,0,Training,BT,PB,Pathological Benign
+77,BRACS_3275,0,Training,BT,N,Normal
+77,BRACS_3276,0,Training,BT,PB,Pathological Benign
+77,BRACS_3277,0,Training,BT,N,Normal
+77,BRACS_3278,0,Training,BT,UDH,Usual Ductal Hyperplasia
+78,BRACS_3279,0,Training,BT,PB,Pathological Benign
+78,BRACS_3281,0,Training,BT,PB,Pathological Benign
+78,BRACS_3282,0,Training,BT,N,Normal
+78,BRACS_3283,0,Training,BT,PB,Pathological Benign
+79,BRACS_3284,0,Validation,BT,UDH,Usual Ductal Hyperplasia
+79,BRACS_3285,0,Validation,AT,FEA,Flat Epithelial Atypia
+81,BRACS_3289,0,Training,MT,IC,Invasive Carcinoma
+81,BRACS_3290,0,Training,MT,IC,Invasive Carcinoma
+82,BRACS_3291,0,Training,MT,IC,Invasive Carcinoma
+82,BRACS_3292,0,Training,BT,N,Normal
+82,BRACS_3293,0,Training,MT,IC,Invasive Carcinoma
+82,BRACS_3294,0,Training,MT,IC,Invasive Carcinoma
+83,BRACS_3295,0,Validation,BT,PB,Pathological Benign
+83,BRACS_3296,0,Validation,BT,PB,Pathological Benign
+83,BRACS_3298,0,Validation,BT,PB,Pathological Benign
+134,BRACS_3300,0,Validation,BT,PB,Pathological Benign
+134,BRACS_3301,0,Validation,MT,IC,Invasive Carcinoma
+134,BRACS_3302,0,Validation,MT,DCIS,Ductal Carcinoma in Situ
+115,BRACS_3305,0,Training,MT,IC,Invasive Carcinoma
+115,BRACS_3308,0,Training,MT,IC,Invasive Carcinoma
+116,BRACS_3309,0,Training,BT,PB,Pathological Benign
+116,BRACS_3310,0,Training,BT,UDH,Usual Ductal Hyperplasia
+116,BRACS_3311,0,Training,BT,PB,Pathological Benign
+116,BRACS_3312,0,Training,BT,PB,Pathological Benign
+116,BRACS_3313,0,Training,BT,UDH,Usual Ductal Hyperplasia
+117,BRACS_3314,0,Training,MT,IC,Invasive Carcinoma
+117,BRACS_3315,0,Training,MT,IC,Invasive Carcinoma
+117,BRACS_3316,0,Training,MT,IC,Invasive Carcinoma
+117,BRACS_3317,0,Training,BT,UDH,Usual Ductal Hyperplasia
+118,BRACS_3318,0,Training,AT,ADH,Atypical Ductal Hyperplasia
+118,BRACS_3319,18,Training,MT,IC,Invasive Carcinoma
+118,BRACS_3320,9,Training,MT,IC,Invasive Carcinoma
+118,BRACS_3321,0,Training,MT,IC,Invasive Carcinoma
+119,BRACS_3322,0,Testing,BT,N,Normal
+119,BRACS_3323,10,Testing,MT,IC,Invasive Carcinoma
+119,BRACS_3324,0,Testing,BT,PB,Pathological Benign
+126,BRACS_3334,0,Training,BT,PB,Pathological Benign
+126,BRACS_3335,0,Training,BT,PB,Pathological Benign
+127,BRACS_3336,0,Training,BT,PB,Pathological Benign
+128,BRACS_3337,0,Validation,BT,PB,Pathological Benign
+170,BRACS_1003658,1,Training,BT,PB,Pathological Benign
+170,BRACS_1003659,1,Training,BT,PB,Pathological Benign
+65,BRACS_1003660,1,Validation,BT,UDH,Usual Ductal Hyperplasia
+65,BRACS_1003661,1,Validation,BT,UDH,Usual Ductal Hyperplasia
+181,BRACS_1003667,1,Training,MT,IC,Invasive Carcinoma
+183,BRACS_1003668,1,Training,BT,PB,Pathological Benign
+185,BRACS_1003669,1,Training,BT,PB,Pathological Benign
+184,BRACS_1003670,1,Training,MT,IC,Invasive Carcinoma
+177,BRACS_1003671,1,Training,BT,PB,Pathological Benign
+177,BRACS_1003672,1,Training,BT,PB,Pathological Benign
+142,BRACS_1003673,1,Training,MT,IC,Invasive Carcinoma
+173,BRACS_1003675,1,Training,BT,N,Normal
+154,BRACS_1003677,1,Training,MT,IC,Invasive Carcinoma
+178,BRACS_1003678,1,Training,MT,IC,Invasive Carcinoma
+155,BRACS_1003684,1,Training,MT,IC,Invasive Carcinoma
+164,BRACS_1003685,1,Training,BT,UDH,Usual Ductal Hyperplasia
+170,BRACS_1003686,1,Training,BT,PB,Pathological Benign
+163,BRACS_1003691,1,Testing,AT,ADH,Atypical Ductal Hyperplasia
+162,BRACS_1003692,1,Training,MT,IC,Invasive Carcinoma
+186,BRACS_1003693,1,Training,AT,FEA,Flat Epithelial Atypia
+180,BRACS_1003694,1,Testing,AT,ADH,Atypical Ductal Hyperplasia
+159,BRACS_1003697,1,Training,MT,DCIS,Ductal Carcinoma in Situ
+179,BRACS_1003698,1,Training,MT,IC,Invasive Carcinoma
+188,BRACS_1003699,1,Training,MT,IC,Invasive Carcinoma
+169,BRACS_1003700,1,Training,BT,PB,Pathological Benign
+172,BRACS_1003703,1,Training,MT,IC,Invasive Carcinoma
+182,BRACS_1003705,1,Training,BT,UDH,Usual Ductal Hyperplasia
+171,BRACS_1003706,1,Training,BT,PB,Pathological Benign
+165,BRACS_1003707,1,Training,BT,UDH,Usual Ductal Hyperplasia
+156,BRACS_1003708,1,Training,MT,IC,Invasive Carcinoma
+157,BRACS_1003709,1,Training,MT,IC,Invasive Carcinoma
+161,BRACS_1003710,1,Training,BT,PB,Pathological Benign
+174,BRACS_1003713,1,Training,BT,N,Normal
+174,BRACS_1003714,1,Training,BT,N,Normal
+187,BRACS_1003715,1,Training,BT,N,Normal
+187,BRACS_1003716,1,Training,BT,N,Normal
+174,BRACS_1003717,1,Training,BT,N,Normal
+174,BRACS_1003718,1,Training,BT,N,Normal
+175,BRACS_1003721,1,Training,MT,IC,Invasive Carcinoma
+175,BRACS_1003722,1,Training,MT,IC,Invasive Carcinoma
+175,BRACS_1003723,1,Training,MT,IC,Invasive Carcinoma
+189,BRACS_1003724,1,Training,BT,PB,Pathological Benign
+189,BRACS_1003725,1,Training,BT,PB,Pathological Benign
+71,BRACS_1003727,1,Training,MT,IC,Invasive Carcinoma
+71,BRACS_1003728,1,Training,AT,ADH,Atypical Ductal Hyperplasia
+176,BRACS_1003730,1,Training,BT,PB,Pathological Benign
+153,BRACS_1003731,1,Training,MT,IC,Invasive Carcinoma
+153,BRACS_1003732,1,Training,MT,IC,Invasive Carcinoma
+166,BRACS_1003734,1,Training,BT,PB,Pathological Benign
