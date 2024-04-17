@@ -51,39 +51,10 @@ def load_and_split(dataset_name, labels, embedding_path, study, k=1):
     num_classes = len(labels[study].unique())
     
     # 3. define random split and extract corresponding slide IDs, embeddings and labels 
-    if dataset_name == "panda":
-        # load train splits 
-        train_df = pd.read_csv("../splits/panda_splits/train_RK_test_RKS/Train.csv", index_col=0)
-        test_splits_R = list(pd.read_csv("../splits/panda_splits/train_RK_test_RKS/Test_R.csv")["image_id"])
-        test_splits_K = list(pd.read_csv("../splits/panda_splits/train_RK_test_RKS/Test_K.csv")["image_id"])
-
-        # generate balanced training split
-        study_dict = dict(zip(labels["slide_id"], labels[study]))
-        train_df[study] = train_df["image_id"].apply(lambda x : study_dict.get(x, -1))
-        train_df = train_df[train_df[study] != -1]
-        train_slide_ids = []
-        for cls in range(num_classes):
-            train_slide_ids += train_df[train_df[study] == cls].sample(k)['image_id'].values.tolist()
-
-        # use official test splits
-        test_slide_ids_raw = test_splits_R + test_splits_K
-        test_slide_ids = []
-        for slide_id in test_slide_ids_raw:
-            if slide_id in list(labels["slide_id"]):
-                test_slide_ids.append(slide_id)
-
-    elif dataset_name == "TCGA_PRAD":
-        train_slide_ids = []
-        for cls in range(1, num_classes+1):
-            train_slide_ids += labels[labels[study] == cls].sample(k)['slide_id'].values.tolist()
-        test_slide_ids = labels[~labels['slide_id'].isin(train_slide_ids)]['slide_id'].values.tolist()
-
-
-    else:
-        train_slide_ids = []
-        for cls in range(num_classes):
-            train_slide_ids += labels[labels[study] == cls].sample(k)['slide_id'].values.tolist()
-        test_slide_ids = labels[~labels['slide_id'].isin(train_slide_ids)]['slide_id'].values.tolist()
+    train_slide_ids = []
+    for cls in range(num_classes):
+        train_slide_ids += labels[labels[study] == cls].sample(k)['slide_id'].values.tolist()
+    test_slide_ids = labels[~labels['slide_id'].isin(train_slide_ids)]['slide_id'].values.tolist()
 
     train_embeddings = np.array([embeddings[n] for n in train_slide_ids])
     test_embeddings = np.array([embeddings[n] for n in test_slide_ids])
