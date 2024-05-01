@@ -10,6 +10,8 @@ This work introduces the first method for **slide representation learning** usin
 ## Code
 This repository contains the implementation of **TANGLE**, with step-by-step instructions to pretrain a TANGLE model on the **TCGA-BRCA** (Invasive breast cancer) cohort. The resulting models is evaluated using linear probing (logistic regression) on BCNC for ER/PR/HER2 status prediction and BRACS fine and coarse subtyping. 
 
+In addition, we provide a script for pan-cancer TANGLE pretraining that aggregates all TCGA cohorts into a unified training. This model was not part of TANGLE and is referred to as TANGLEv2. 
+
 ### Installation
 
 ```bash
@@ -45,7 +47,14 @@ To train Tangle, use:
 source scripts/launch_tangle_training.sh
 ```
 
-### Evaluate on TCGA-BRCA
+To train Tanglev2, use:
+
+```bash
+# Train Tangle
+source scripts/launch_tanglev2_training.sh
+```
+
+### Evaluate TCGA-BRCA on BRACS and BCNB
 
 We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=sharing) that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation on BRACS and BCNB. 
 
