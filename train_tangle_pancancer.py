@@ -28,8 +28,6 @@ LABELS = {}
 for idx, cohort in enumerate(COHORTS):
     LABELS[cohort] = idx
 
-OP108_TASK = "OncoTreeCode_label"
-
 
 def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler):
         
@@ -151,7 +149,7 @@ def get_args():
 
     # hparams to vary 
     METHOD = 'tangle'
-    STUDY = 'pancancerTCGA'
+    STUDY = 'pancancer'
     RNA_RECONSTRUCTION = True if METHOD == 'tanglerec' else False 
     INTRA_MODALITY = True if METHOD == 'intra' else False 
     STOPPING_CRITERIA = 'train_rank' if METHOD == 'tangle' or METHOD == 'intra' else 'fixed'
@@ -228,11 +226,6 @@ if __name__ == "__main__":
     )
     RESULS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
     ROOT_RNA_DIR = "rna_data/processed_data_{}/".format(args["rna_encoder"]) 
-    
-    # check if experiment already exists and can be skipped 
-    if os.path.exists(os.path.join(RESULS_SAVE_PATH, "op108_results_dict.pkl")):
-        print("{} already done, so moving on...".format(EXP_CODE))
-        exit()
     
     os.makedirs(RESULS_SAVE_PATH, exist_ok=True)
     print(f"Running experiment {EXP_CODE}...")

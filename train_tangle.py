@@ -2,6 +2,7 @@
 import os
 import numpy as np
 from tqdm import tqdm
+import json 
 
 # --> Torch imports 
 import torch
@@ -151,6 +152,25 @@ def val_loop(ssl_model, val_dataloader):
     return results_dict, rank
 
 
+def write_dict_to_config_file(config_dict, json_file_path):
+    """
+    Write a dictionary to a configuration file.
+
+    Args:
+        config_dict (dict): The dictionary to be written to the config file.
+        config_file_path (str): The path to the configuration file.
+
+    Returns:
+        None
+    """
+    config_dict_dump = {}
+    for key in config_dict:
+        config_dict_dump[key] = str(config_dict[key])
+    
+    with open(json_file_path, 'w') as jsonfile:
+        json.dump(config_dict_dump, jsonfile, indent=4)
+
+
 if __name__ == "__main__":
     
     # setup args and seed
@@ -179,6 +199,7 @@ if __name__ == "__main__":
         args["temperature"]
     )
     RESULTS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
+    write_dict_to_config_file(args, os.path.join(RESULTS_SAVE_PATH, "config.json"))
 
     print()
     print(f"Running experiment {EXP_CODE}...")
