@@ -1,9 +1,7 @@
 # --> General imports
 import os
 import numpy as np
-import pandas as pd
 from tqdm import tqdm
-import pickle
 
 # --> Torch imports 
 import torch
@@ -13,13 +11,12 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.optim.lr_scheduler import LinearLR
-from tensorboardX import SummaryWriter
 
 # --> internal imports 
 from core.models.mmssl import MMSSL
-from core.dataset.dataset import TangleDataset, SlideDataset
+from core.dataset.dataset import TangleDataset
 from core.loss.tangle_loss import InfoNCE, apply_random_mask, init_intra_wsi_loss_function
-from core.utils.learning import smooth_rank_measure, collate_tangle, collate_slide, set_seed
+from core.utils.learning import smooth_rank_measure, collate_tangle, set_seed
 from core.utils.process_args import process_args
 
 import pdb
@@ -161,6 +158,7 @@ if __name__ == "__main__":
     args = vars(args)
     set_seed(args["seed"])
     
+    # Set params for loss computation 
     RNA_RECONSTRUCTION = True if args["method"] == 'tanglerec' else False 
     INTRA_MODALITY = True if args["method"] == 'intra' else False 
     STOPPING_CRITERIA = 'train_rank' if args["method"] == 'tangle' or args["method"] == 'intra' else 'fixed'
@@ -189,8 +187,6 @@ if __name__ == "__main__":
     # Create a SummaryWriter
     log_dir = os.path.join(ROOT_SAVE_DIR, 'logs', EXP_CODE)
     os.makedirs(log_dir, exist_ok=True)
-    writer = SummaryWriter(log_dir)
-    
     os.makedirs(RESULTS_SAVE_PATH, exist_ok=True)
     
     # make tangle dataset

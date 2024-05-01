@@ -5,12 +5,12 @@ from torch import nn
 __all__ = ['InfoNCE', 'info_nce']
 
 
-def apply_random_mask(patch_embeddings, patch_positions, percentage):
+def apply_random_mask(patch_embeddings, percentage):
     _, dim_size, _ = patch_embeddings.shape
     mask_count = int(percentage * dim_size)
     mask = torch.cat([torch.zeros(mask_count), torch.ones(dim_size - mask_count)])
     mask = mask[torch.randperm(dim_size)].unsqueeze(0).unsqueeze(-1)
-    return patch_embeddings*mask, patch_positions*mask
+    return patch_embeddings*mask_count
     
 
 def init_intra_wsi_loss_function(config):

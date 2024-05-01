@@ -17,8 +17,8 @@ class TangleDataset(Dataset):
         """
         - feats_dir: str, directory where feat .pt files are stored
         - rna_dir: str, directory where rna_data .pt files are stored
-        - n_tokens: int, number of tokens/patches to sample from feats
-        - sampling_strategy: str, strategy to sample patches ("random" or "kmeans_cluster")
+        - n_tokens: int, number of tokens/patches to sample from all features
+        - sampling_strategy: str, strategy to sample patches (only "random" available)
         """
         self.feats_dir = feats_dir
         self.rna_dir = rna_dir
@@ -88,39 +88,39 @@ class SlideDataset(Dataset):
         return features, slide_id
 
 
-class FewShotClassificationDataset:
-    """
-    Dataset for few-shot classification in TCGA.
-    Returns the slide embedding, binary label, and the slide ID.
-    """
+# class FewShotClassificationDataset:
+#     """
+#     Dataset for few-shot classification in TCGA.
+#     Returns the slide embedding, binary label, and the slide ID.
+#     """
 
-    def __init__(self, feature_folder_path, csv_path):
-        self.feature_folder_path = feature_folder_path
-        self.slide_embeddings = self.get_features()
-        self.labels = pd.read_csv(csv_path)
+#     def __init__(self, feature_folder_path, csv_path):
+#         self.feature_folder_path = feature_folder_path
+#         self.slide_embeddings = self.get_features()
+#         self.labels = pd.read_csv(csv_path)
         
-    def get_features(self):
-        if os.path.isfile(self.feature_folder_path):
-            file = open(self.feature_folder_path, 'rb')
-            obj = pickle.load(file)
-            embeddings = obj['embeds']
-        return embeddings 
+#     def get_features(self):
+#         if os.path.isfile(self.feature_folder_path):
+#             file = open(self.feature_folder_path, 'rb')
+#             obj = pickle.load(file)
+#             embeddings = obj['embeds']
+#         return embeddings 
 
-    def get_few_shot_binary_datasets(self, k=None):
+#     def get_few_shot_binary_datasets(self, k=None):
         
-        if k is None: # Keep all samples
-            k_neg_indices = np.where(self.labels == 0)[0].tolist()
-            k_pos_indices = np.where(self.labels == 1)[0].tolist()
-        else:
-            k_neg_indices = random.sample(np.where(self.labels == 0)[0].tolist(), k) 
-            k_pos_indices = random.sample(np.where(self.labels == 1)[0].tolist(), k) 
+#         if k is None: # Keep all samples
+#             k_neg_indices = np.where(self.labels == 0)[0].tolist()
+#             k_pos_indices = np.where(self.labels == 1)[0].tolist()
+#         else:
+#             k_neg_indices = random.sample(np.where(self.labels == 0)[0].tolist(), k) 
+#             k_pos_indices = random.sample(np.where(self.labels == 1)[0].tolist(), k) 
 
-        neg_labels = self.labels[k_neg_indices]
-        pos_labels = self.labels[k_pos_indices]
+#         neg_labels = self.labels[k_neg_indices]
+#         pos_labels = self.labels[k_pos_indices]
 
-        neg_features = [self.slide_embeddings[idx] for idx in k_neg_indices]
-        pos_features = [self.slide_embeddings[idx] for idx in k_pos_indices]
-        data_dict = {}
-        data_dict["features"] = np.concatenate((pos_features, neg_features))
-        data_dict["binary_classes"] = np.concatenate((pos_labels, neg_labels))
-        return data_dict
+#         neg_features = [self.slide_embeddings[idx] for idx in k_neg_indices]
+#         pos_features = [self.slide_embeddings[idx] for idx in k_pos_indices]
+#         data_dict = {}
+#         data_dict["features"] = np.concatenate((pos_features, neg_features))
+#         data_dict["binary_classes"] = np.concatenate((pos_labels, neg_labels))
+#         return data_dict

@@ -35,7 +35,7 @@ def calculate_metrics(y_true, y_pred, pred_scores):
     return auc, bacc
 
 
-def load_and_split(dataset_name, labels, embedding_path, study, k=1):
+def load_and_split(labels, embedding_path, study, k=1):
 
     # 1. load embeddings as dict where key is slide ID 
     file = open(embedding_path, 'rb')
@@ -76,9 +76,9 @@ def load_and_split(dataset_name, labels, embedding_path, study, k=1):
     return train_embeddings, train_labels, test_embeddings, test_labels
     
 
-def eval_single_task(DATASET_NAME, TASKS, PATH, exp_name, verbose=True):
+def eval_single_task(DATASET_NAME, TASKS, PATH, verbose=True):
         
-    ALL_K = [25]
+    ALL_K = [10]
   
     if DATASET_NAME == "BCNB":
         EMBEDS_PATH = "{}/bcnb_results_dict.pkl".format(PATH) 
@@ -111,32 +111,16 @@ def eval_single_task(DATASET_NAME, TASKS, PATH, exp_name, verbose=True):
                 LABELS = LABELS[['slide_id', task]]
 
                 # Load embeddings, labels and split data 
-                train_features, train_labels, test_features, test_labels = load_and_split(DATASET_NAME, LABELS, EMBEDS_PATH, task, k)
+                train_features, train_labels, test_features, test_labels = load_and_split(LABELS, EMBEDS_PATH, task, k)
     
-                ################ Should be OK for here ########################
                 if verbose:
                     print(f"     Fitting logistic regression on {len(train_features)} slides")
                     print(f"     Evaluating on {len(test_features)} slides")
 
-                # if gridsearch done for experiment, then use those params
-                clean_dataset_name = DATASET_NAME.replace(" ", "_")
-                file_name = f"{exp_name}_{clean_dataset_name}_{task}_k={25}.pickle"
-                file_path = os.path.join(GRIDSEARCH_RESULTS, file_name)
-
-                # uncomment if you want to use grid search values
-                if os.path.exists(file_path):
-                    file = open(file_path, 'rb')
-                    obj = pickle.load(file)
-                    key = f"{clean_dataset_name}_{task}_k={k}"
-                    if key in obj:
-                        gcv_results = obj[key]
-                        reg = gcv_results[gcv_results["rank"] == 1.0].iloc[0, 0]
-                    else:
-                        reg = 1.0
-                else:
-                    reg = 1.0
-                
-                clf = LogisticRegression(max_iter=10000, C = reg, penalty="l2", solver = "lbfgs")
+                NUM_C = 2
+                COST = (train_features.shape[1] * NUM_C) / 100
+                clf = LogisticRegression(C=COST, max_iter=10000, verbose=0, random_state=0)
+                # clf = LogisticRegression(max_iter=100000)
                 clf.fit(X=train_features, y=train_labels)
                 pred_labels = clf.predict(X=test_features)
                 pred_scores = clf.predict_proba(X=test_features)
@@ -159,7 +143,7 @@ def eval_single_task(DATASET_NAME, TASKS, PATH, exp_name, verbose=True):
                 if verbose:
                     print(f"     Done for fold {fold} -- AUC: {round(auc, 3)}, BACC: {round(bacc, 3)}\n")
             
-            metrics_store_all['madeleine'] = metrics_store
+            metrics_store_all['tangle'] = metrics_store
             if task == "isup_grade":
                 print('k={}, task={}, quadratic kappa={}'.format(
                     k,
@@ -183,12 +167,9 @@ def eval_single_task(DATASET_NAME, TASKS, PATH, exp_name, verbose=True):
 # main 
 if __name__ == "__main__":
 
-    GRIDSEARCH_RESULTS = "gridsearch_results"
-
-    print()
     tasks = BREAST_TASKS
     print("* Evaluating on breast...")
-    print("* Tasks = {}".format(list(tasks.keys())))
+    print("* All datasets to evaluate on = {}".format(list(tasks.keys())))
 
     MODELS = {
         'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/",
@@ -200,4 +181,4 @@ if __name__ == "__main__":
     for exp_name, p in MODELS.items():
         for n, t in tasks.items():
             print('\n* Dataset:', exp_name)
-            eval_single_task(n, t, p, exp_name, verbose=False)
+            eval_single_task(n, t, p, verbose=False)

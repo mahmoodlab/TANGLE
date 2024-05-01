@@ -31,7 +31,7 @@ for idx, cohort in enumerate(COHORTS):
 OP108_TASK = "OncoTreeCode_label"
 
 
-def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler, n_views):
+def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler):
         
     ssl_model.train()
     ssl_model.to(DEVICE)
@@ -39,7 +39,6 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
     ep_loss = 0.
     fb_time = 0.
     all_embeds = []
-    accum_iter = config['accum_iter']
     
     for b_idx, (patch_emb, rna_seq, avg_patch_emb) in enumerate(dataloader):
         
@@ -70,38 +69,28 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
         if config["intra_modality_wsi"]:
             out = ssl_model(patch_emb, None)
         else:
-            out = ssl_model(patch_emb, rna_emb=rna_seq, n_views=n_views)
+            out = ssl_model(patch_emb, rna_emb=rna_seq)
         wsi_emb, rna_emb, rna_reconstruction = out["wsi_emb"], out["rna_emb"], out["rna_reconstruction"]
         
         # inter modality loss wsi <-> rna
         if rna_emb is not None:
-            if n_views > 1:
-                rna_emb = rna_emb.repeat_interleave(n_views, dim=0)
-                bs = int(wsi_emb.shape[0] / n_views)
-                # Sub-optimal implementation bc the positive are not attracted. 
-                # It's only 1 pos and bs neg repeated the number of views 
-                for v in range(n_views):
-                    indices = np.array(list(range(0, bs*n_views, n_views))) + v
-                    losses.append(loss_fn['inter_modality'](query=wsi_emb[indices, :], positive_key=rna_emb[indices, :], symmetric=config["symmetric_cl"]))
-            else:
-                if config['loss'] == "info-nce":
-                    curr_loss = loss_fn['inter_modality'](query=wsi_emb, positive_key=rna_emb, symmetric=config["symmetric_cl"])
-                elif config['loss'] == "siglip":
-                    logit_scale = out["logit_scale"]
-                    logit_bias = out["logit_bias"]
-                  
-                    curr_loss = loss_fn['inter_modality'](image_features=wsi_emb, rna_features=rna_emb, logit_scale=logit_scale, logit_bias=logit_bias)
-                elif config['loss'] == 'BarlowTwins':
-                    curr_loss = loss_fn['inter_modality'](z1=wsi_emb, z2=rna_emb)
-                losses.append(curr_loss)
+            if config['loss'] == "info-nce":
+                curr_loss = loss_fn['inter_modality'](query=wsi_emb, positive_key=rna_emb, symmetric=config["symmetric_cl"])
+            elif config['loss'] == "siglip":
+                logit_scale = out["logit_scale"]
+                logit_bias = out["logit_bias"]
+                
+                curr_loss = loss_fn['inter_modality'](image_features=wsi_emb, rna_features=rna_emb, logit_scale=logit_scale, logit_bias=logit_bias)
+            elif config['loss'] == 'BarlowTwins':
+                curr_loss = loss_fn['inter_modality'](z1=wsi_emb, z2=rna_emb)
+            losses.append(curr_loss)
             
         # reconstruction loss 
         if rna_reconstruction is not None:
             losses.append(loss_fn['expression_reconstruction'](rna_reconstruction, rna_seq))
             ep_recon_loss += losses[-1].item()
             
-        loss = sum(losses) / n_views
-        loss = loss / accum_iter
+        loss = sum(losses)
         
         # accumate loss
         loss.backward() 
@@ -180,6 +169,9 @@ def get_args():
         args["cohorts"] = COHORTS
     else:
         args["cohorts"] = [STUDY]
+
+    # set loss -- here, we only provide info-nce
+    args['loss'] = "info-nce"
     
     # get dtype 
     if args['dtype'] == "float64":
@@ -219,24 +211,20 @@ if __name__ == "__main__":
     # paths
     ROOT_SAVE_DIR = "results/{}_checkpoints_and_embeddings".format(args["study"])
     ROOT_DATA_DIR = "data/"
-    EXP_CODE = "{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_accumIter{}_nViews{}_endLR{}_loss{}_hidDim{}_L2{}_rna{}_rnaNorm{}".format(
-        args["name"],
+    EXP_CODE = "{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_endLR{}_loss{}_hidDim{}_L2{}".format(
+        args["study"],
         args["learning_rate"], 
         args["epochs"], 
         args["batch_size"], 
-        args["token_size"],
+        args["n_tokens"],
         args["temperature"],
         args['rna_encoder'],
         args['dtype'],
         args['n_heads'],
-        args['accum_iter'],
-        args['n_views'],
         args['end_learning_rate'],
         args['loss'],
         args['hidden_dim'],
         args['weight_decay'],
-        args['rna_data_type'],
-        args['rna_normalization']
     )
     RESULS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
     ROOT_RNA_DIR = "rna_data/processed_data_{}/".format(args["rna_encoder"]) 
@@ -260,15 +248,13 @@ if __name__ == "__main__":
     for cohort in args["cohorts"]:
         
         feats_dir = os.path.join(ROOT_DATA_DIR, 'tcga', cohort, args["feature_type"])
-        rna_dir = os.path.join(ROOT_DATA_DIR, 'tcga', cohort, "rna_data", args['rna_data_type'])
+        rna_dir = os.path.join(ROOT_DATA_DIR, 'tcga', cohort, "rna_data")
         
         curr_dataset = TangleDataset(
             feats_dir=feats_dir,
-            coords_dir=None,
             rna_dir=rna_dir,
             sampling_strategy=args["sampling_strategy"], 
-            n_tokens=args["token_size"],
-            normalize_rna=args['rna_normalization']
+            n_tokens=args["n_tokens"],
         )
         all_datasets.append(curr_dataset)
         all_labels = all_labels + [LABELS[cohort]] * len(curr_dataset)
@@ -336,7 +322,7 @@ if __name__ == "__main__":
         
         # train
         start = time.time()
-        ep_loss, train_rank = train_loop(args, loss_fn, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler, args['n_views'])
+        ep_loss, train_rank = train_loop(args, loss_fn, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler)
         last_lr = scheduler.get_last_lr()
         end = time.time()
 
