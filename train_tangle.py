@@ -155,11 +155,9 @@ def val_loop(ssl_model, val_dataloader):
 def write_dict_to_config_file(config_dict, json_file_path):
     """
     Write a dictionary to a configuration file.
-
     Args:
         config_dict (dict): The dictionary to be written to the config file.
         config_file_path (str): The path to the configuration file.
-
     Returns:
         None
     """
@@ -199,6 +197,7 @@ if __name__ == "__main__":
         args["temperature"]
     )
     RESULTS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
+    os.makedirs(RESULTS_SAVE_PATH, exist_ok=True)
     write_dict_to_config_file(args, os.path.join(RESULTS_SAVE_PATH, "config.json"))
 
     print()
@@ -208,7 +207,6 @@ if __name__ == "__main__":
     # Create a SummaryWriter
     log_dir = os.path.join(ROOT_SAVE_DIR, 'logs', EXP_CODE)
     os.makedirs(log_dir, exist_ok=True)
-    os.makedirs(RESULTS_SAVE_PATH, exist_ok=True)
     
     # make tangle dataset
     print("* Setup dataset...")

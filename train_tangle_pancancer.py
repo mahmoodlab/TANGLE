@@ -209,7 +209,8 @@ if __name__ == "__main__":
     # paths
     ROOT_SAVE_DIR = "results/{}_checkpoints_and_embeddings".format(args["study"])
     ROOT_DATA_DIR = "data/"
-    EXP_CODE = "{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_endLR{}_loss{}_hidDim{}_L2{}".format(
+    EXP_CODE = "{}_{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_endLR{}_loss{}_hidDim{}_L2{}".format(
+        args['objective'],
         args["study"],
         args["learning_rate"], 
         args["epochs"], 

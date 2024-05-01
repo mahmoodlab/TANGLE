@@ -171,6 +171,7 @@ if __name__ == "__main__":
     print("* Evaluating on breast...")
     print("* All datasets to evaluate on = {}".format(list(tasks.keys())))
 
+    # Put your slide embeddings here... 
     MODELS = {
         'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/",
         'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01",

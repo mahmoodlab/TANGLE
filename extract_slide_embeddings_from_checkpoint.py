@@ -52,7 +52,7 @@ if __name__ == "__main__":
     
     args = process_args()
     args = vars(args)
-    assert args['pretrained'] is not None, "Must provide a path to a pretrained dir."
+    assert args['pretrained'] is not None, "Must provide a path to a pretrained dir. Usage: --pretrained SOME_PATH/EXP_CODE/"
     config_from_model = read_config(args['pretrained'])
     args = set_args(args, config_from_model)
 
