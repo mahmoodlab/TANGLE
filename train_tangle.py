@@ -277,8 +277,6 @@ if __name__ == "__main__":
         # train
         start = time.time()
         ep_loss, train_rank = train_loop(args, loss_fn_interMod, loss_fn_rnaRecon, loss_fn_intraMod, ssl_model, epoch, dataloader, optimizer, scheduler_warmup, scheduler)
-        writer.add_scalar('Training Loss', ep_loss, epoch)
-        writer.add_scalar('Train rank', train_rank, epoch)
         end = time.time()
 
         print()
@@ -288,10 +286,11 @@ if __name__ == "__main__":
         print("Total time = {:.3f} seconds".format(end-start))
 
         # Stop training based on rank of the training samples. Ok for TANGLE and Intra. 
-        if STOPPING_CRITERIA == 'train_rank' and train_rank > best_rank:
-            print('Better rank: {} --> {}. Saving model'.format(best_rank, train_rank))
-            best_rank = train_rank
-            torch.save(ssl_model.state_dict(), os.path.join(RESULTS_SAVE_PATH, "model.pt"))
+        if STOPPING_CRITERIA == 'train_rank':
+            if train_rank > best_rank:
+                print('Better rank: {} --> {}. Saving model'.format(best_rank, train_rank))
+                best_rank = train_rank
+                torch.save(ssl_model.state_dict(), os.path.join(RESULTS_SAVE_PATH, "model.pt"))
         # Otherwise, stop after fixed number of training epochs. Ok for TANGLE-Rec. 
         else:
             torch.save(ssl_model.state_dict(), os.path.join(RESULTS_SAVE_PATH, "model.pt"))
