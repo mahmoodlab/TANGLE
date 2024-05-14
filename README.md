@@ -47,14 +47,7 @@ To train Tangle, use:
 source scripts/launch_tangle_training.sh
 ```
 
-To train Tanglev2, use:
-
-```bash
-# Train Tangle
-source scripts/launch_tanglev2_training.sh
-```
-
-### Evaluate TCGA-BRCA on BRACS and BCNB
+### Evaluate TANGLE trained with TCGA-BRCA on BRACS and BCNB
 
 We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=sharing) that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted slide embeddings for TCGA-BRCA. In addition, we provide a script for downstream evaluation on BRACS and BCNB. 
 
@@ -65,6 +58,17 @@ To run few-shot evaluation:
 python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAINED>
 python run_linear_probing.py
 ```
+
+### Training on all TCGA cohorts
+
+To train Tanglev2 on all TCGA cohorts, use:
+
+```bash
+# Train Tangle
+source scripts/launch_tanglev2_training.sh
+```
+
+Note that we do not provide pre-extracted patch embeddings nor gene expression. 
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.
