@@ -38,7 +38,7 @@ Preprocessing the corresponding gene expression profile can be done in several w
 
 ### Training on TCGA-BRCA
 
-To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`. Due to MGB cohort being private, we cannot upload the downstream in-house MGB cohort, and instead provide results based on BCNB and BRACS.
+To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`.
 
 To train Tangle, use:
 
