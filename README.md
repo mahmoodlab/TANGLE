@@ -59,6 +59,15 @@ python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAI
 python run_linear_probing.py
 ```
 
+These models perform as:
+
+|            | |   k=1   |      | k=10 |     |      | k=25 |     |      |
+|------------|-----|-----|------|------|-----|------|------|-----|------|
+|            | ER  | PR  | HER2 | ER   | PR  | HER2 | ER   | PR  | HER2 |
+| **Tangle** | 0.675 | 0.557   | 0.529   | 0.79    | 0.722   | 0.652   | 0.803    | 0.723   | 0.663   |
+| **Tangle-Rec** | ??   | ??   | ??   | ??    | ??   | ??   | ??    | ??   | ??   |
+| **Intra**  | ??   | ??   | ??   | ??    | ??   | ??   | ??    | ??   | ??   |
+
 ### Training on all TCGA cohorts
 
 To train Tanglev2 on all TCGA cohorts, use:
