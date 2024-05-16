@@ -8,7 +8,7 @@ Welcome to the official GitHub repository of our CVPR 2024 paper, "Transcriptomi
 This work introduces the first method for **slide representation learning** using **multimodal pretraining**. Slide representation learning defines a new class of self-supervised methods that aim at extracting information-rich embeddings of histology whole-slide images without using explicit supervision (such as cancer subtype or cancer grade). In this work, we introduce **TANGLE**, a method for Slide + Expression (S+E) pretraining. Conceptually, this method follows the CLIP principle widely employed in Vision-Language models. Here, **we align the slide with its corresponding gene expression profile**. The resulting slide encoder embeds the underlying molecular landscape of the tissue and can, as such, be used for various downstream tasks. In this work, we focus on morphological subtyping of breast and lung cancer and morphological lesion detection in pre-clinical drug safety studies.  
 
 ## Code
-This repository contains the implementation of **TANGLE**, with step-by-step instructions to pretrain a TANGLE model on the **TCGA-BRCA** (Invasive breast cancer) cohort. The resulting models is evaluated using linear probing (logistic regression) on BCNC for ER/PR/HER2 status prediction and BRACS fine and coarse subtyping. 
+This repository contains the implementation of **TANGLE**, with step-by-step instructions to pretrain a TANGLE model on the **TCGA-BRCA** (Invasive breast cancer) cohort. The resulting models is evaluated using linear probing (logistic regression) on BCNC for ER/PR/HER2 status prediction. 
 
 In addition, we provide a script for pan-cancer TANGLE pretraining that aggregates all TCGA cohorts into a unified training. This model was not part of TANGLE and is referred to as TANGLEv2. 
 
@@ -38,7 +38,7 @@ Preprocessing the corresponding gene expression profile can be done in several w
 
 ### Training on TCGA-BRCA
 
-To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`. Due to MGB cohort being private, we cannot upload the downstream in-house MGB cohort, and instead provide results based on BCNB and BRACS.
+To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA CTransPath patch embeddings, (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`.
 
 To train Tangle, use:
 
@@ -68,7 +68,7 @@ To train Tanglev2 on all TCGA cohorts, use:
 source scripts/launch_tanglev2_training.sh
 ```
 
-Note that we do not provide pre-extracted patch embeddings nor gene expression. 
+Note that due to storage constrains, we cannot provide pre-extracted patch embeddings and gene expression data.  
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.

@@ -1,2 +1,3 @@
 
-python run_few_shot_eval.py
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/
+python run_linear_probing.py
