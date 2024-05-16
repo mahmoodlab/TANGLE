@@ -55,7 +55,7 @@ To run few-shot evaluation:
 
 ```bash
 # Extract slide embeddings 
-python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAINED>
+python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAINED_MODEL>
 python run_linear_probing.py
 ```
 

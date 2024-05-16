@@ -1,8 +1,8 @@
 
 """
-python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.1/
-python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs128_tokensize4096_temperature0.01/
-python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs128_tokensize2048_temperature0.01/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/
+python extract_slide_embeddings_from_checkpoint.py --pretrained results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/
 python extract_slide_embeddings_from_checkpoint.py --pretrained results/pancancer_checkpoints_and_embeddings/tangle_pancancer/
 """
 
@@ -20,11 +20,16 @@ import pdb
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# {dataset_name : "path_to_features"}
+DOWNSTREAM_TASKS_CONFIG = {
+    "bcnb" : "./data/bcnb_features"
+}
+
 
 def set_args(args, config_from_model):
     exp_code = args['pretrained'].split('/')[-1]
     args['study'] = exp_code.split('_')[0]
-    for key in ['wsi_encoder', 'activation', 'method', 'n_heads', 'hidden_dim', 'rna_encoder', 'rna_token_dim', 'embedding_dim', 'downstream_paths']:
+    for key in ['wsi_encoder', 'activation', 'method', 'n_heads', 'hidden_dim', 'rna_encoder', 'embedding_dim', 'rna_token_dim']:
         args[key] = config_from_model[key]
 
     args["rna_reconstruction"] = True if args["method"] == 'tanglerec' else False 
@@ -60,7 +65,7 @@ if __name__ == "__main__":
     print("* Setup model...")
     model = MMSSL(
         config=args,
-        n_tokens_rna=args["rna_token_dim"],
+        n_tokens_rna=int(args["rna_token_dim"]),
     ).to(DEVICE) 
     total_params = sum(p.numel() for p in model.parameters())
     print("* Total number of parameters = {}".format(total_params))
@@ -70,7 +75,7 @@ if __name__ == "__main__":
     model = restore_model(model, torch.load(os.path.join(args["pretrained"], 'model.pt')))
 
     # extract downstream slide embeddings using the freshly trained model
-    for key, val in config_from_model['downstream_paths'].items():
+    for key, val in DOWNSTREAM_TASKS_CONFIG.items():
         print('Extracting slide embeddings in :', key)
 
         _ = extract_wsi_embs_and_save(

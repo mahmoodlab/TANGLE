@@ -161,12 +161,8 @@ def write_dict_to_config_file(config_dict, json_file_path):
     Returns:
         None
     """
-    config_dict_dump = {}
-    for key in config_dict:
-        config_dict_dump[key] = str(config_dict[key])
-    
     with open(json_file_path, 'w') as jsonfile:
-        json.dump(config_dict_dump, jsonfile, indent=4)
+        json.dump(config_dict, jsonfile, indent=4)
 
 
 if __name__ == "__main__":
@@ -184,6 +180,7 @@ if __name__ == "__main__":
 
     args["rna_reconstruction"] = RNA_RECONSTRUCTION
     args["intra_modality_wsi"] = INTRA_MODALITY
+    args["rna_token_dim"] = N_TOKENS_RNA
 
     # paths 
     ROOT_SAVE_DIR = "./results/{}_checkpoints_and_embeddings".format(args["study"])
