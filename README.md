@@ -68,7 +68,7 @@ To train Tanglev2 on all TCGA cohorts, use:
 source scripts/launch_tanglev2_training.sh
 ```
 
-Note that we do not provide pre-extracted patch embeddings nor gene expression. 
+Note that due to storage constrains, we cannot provide pre-extracted patch embeddings and gene expression data.  
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.
