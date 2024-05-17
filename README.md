@@ -65,8 +65,8 @@ These models perform as:
 |------------|-----|-----|------|------|-----|------|------|-----|------|
 |            | ER  | PR  | HER2 | ER   | PR  | HER2 | ER   | PR  | HER2 |
 | **Tangle** | 0.675 | 0.557   | 0.529   | 0.79    | 0.722   | 0.652   | 0.803    | 0.723   | 0.663   |
-| **Tangle-Rec** | ??   | ??   | ??   | ??    | ??   | ??   | ??    | ??   | ??   |
-| **Intra**  | ??   | ??   | ??   | ??    | ??   | ??   | ??    | ??   | ??   |
+| **Tangle-Rec** | 0.686   | 0.571   | 0.53   | 0.791    | 0.715   | 0.616   | 0.804    | 0.732   | 0.636   |
+| **Intra**  | 0.533   | 0.511   | 0.493   | 0.691    | 0.61   | 0.562   | 0.714    | 0.68   | 0.602   |
 
 ### Training on all TCGA cohorts
 
@@ -77,7 +77,7 @@ To train Tanglev2 on all TCGA cohorts, use:
 source scripts/launch_tanglev2_training.sh
 ```
 
-Note that due to storage constrains, we cannot provide pre-extracted patch embeddings and gene expression data.  
+Note that due to storage constraints, we cannot provide pre-extracted patch embeddings and gene expression data.  
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.
