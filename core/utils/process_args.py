@@ -35,6 +35,8 @@ def process_args():
     parser.add_argument('--method', type=str, default='tangle', help='Train recipe. Options are: tangle, tanglerec, intra.')
     parser.add_argument('--num_workers', type=int, default=20, help='number of cpu workers')
     parser.add_argument('--weight_decay', type=float, default=0.0001, help='Weight decay.')
+    parser.add_argument('--feature_type', type=str, default='uni_feats', help='What type of features are you using?')
+    
 
     #---> model inference 
     parser.add_argument('--pretrained', type=str, default=None, help='Path to dir with checkpoint.')

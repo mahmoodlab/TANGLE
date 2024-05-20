@@ -38,9 +38,8 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
     fb_time = 0.
     all_embeds = []
     
-    for b_idx, (patch_emb, rna_seq, avg_patch_emb) in enumerate(dataloader):
+    for b_idx, (patch_emb, rna_seq, _, _) in enumerate(dataloader):
         
-        losses = []
         s_fb = time.time()
 
         # preprocessing for intra-modality loss 
@@ -48,47 +47,14 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
             raise NotImplementedError('Revise implementation by return different views in dataloader.')
 
         # set data on device and set to float-16. 
-        patch_emb = patch_emb.to(DEVICE) 
-        if isinstance(rna_seq, dict):
-            rna_seq = {
-                'gene_ids': rna_seq['gene_ids'].to(DEVICE),  
-                'gene_expression': rna_seq['gene_expression'].to(DEVICE).float(),
-                'padding': rna_seq['padding'].to(DEVICE),
-            }
-        elif isinstance(rna_seq, torch.Tensor):
-            rna_seq = rna_seq.to(DEVICE)
-
-        if config["intra_modality_mode_wsi"] == "contrast_avg_emb" or config["intra_modality_mode_wsi"] == "reconstruct_avg_emb" or config["intra_modality_mode_wsi"] == "reconstruct_masked_emb+contrast_avg_emb":
-            avg_patch_emb = avg_patch_emb.cuda()
+        patch_emb = patch_emb.to(DEVICE).to(config['dtype'])
+        rna_seq = rna_seq.to(DEVICE).to(config['dtype'])
                 
         # forward pass 
-        patch_emb = patch_emb.to(config['dtype'])
-        rna_seq = rna_seq.to(config['dtype'])
-        if config["intra_modality_wsi"]:
-            out = ssl_model(patch_emb, None)
-        else:
-            out = ssl_model(patch_emb, rna_emb=rna_seq)
-        wsi_emb, rna_emb, rna_reconstruction = out["wsi_emb"], out["rna_emb"], out["rna_reconstruction"]
-        
+        wsi_emb, rna_emb, _ = ssl_model(patch_emb, rna_emb=rna_seq)
+
         # inter modality loss wsi <-> rna
-        if rna_emb is not None:
-            if config['loss'] == "info-nce":
-                curr_loss = loss_fn['inter_modality'](query=wsi_emb, positive_key=rna_emb, symmetric=config["symmetric_cl"])
-            elif config['loss'] == "siglip":
-                logit_scale = out["logit_scale"]
-                logit_bias = out["logit_bias"]
-                
-                curr_loss = loss_fn['inter_modality'](image_features=wsi_emb, rna_features=rna_emb, logit_scale=logit_scale, logit_bias=logit_bias)
-            elif config['loss'] == 'BarlowTwins':
-                curr_loss = loss_fn['inter_modality'](z1=wsi_emb, z2=rna_emb)
-            losses.append(curr_loss)
-            
-        # reconstruction loss 
-        if rna_reconstruction is not None:
-            losses.append(loss_fn['expression_reconstruction'](rna_reconstruction, rna_seq))
-            ep_recon_loss += losses[-1].item()
-            
-        loss = sum(losses)
+        loss = loss_fn['inter_modality'](query=wsi_emb, positive_key=rna_emb, symmetric=config["symmetric_cl"])
         
         # accumate loss
         loss.backward() 
@@ -99,6 +65,7 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
         e_fb = time.time()
         fb_time += e_fb - s_fb
 
+        # step scheduler
         if epoch <= config["warmup_epochs"]:
             scheduler_warmup.step()
         else:
@@ -109,20 +76,13 @@ def train_loop(config, loss_fn, ssl_model, epoch, dataloader, optimizer, schedul
             
         ep_loss += loss.item()
         
-        # get the train embeds to calculate rank
-        ssl_model.eval()
-        # do everything without grads 
-        with torch.no_grad():
-            out = ssl_model(patch_emb)
-            wsi_emb_to_store = out["wsi_emb"]
-            all_embeds.extend(wsi_emb_to_store.float().cpu().detach().numpy())
-        ssl_model.train()
+        # save the wsi_emb 
+        all_embeds.extend(wsi_emb.float().cpu().detach().numpy())
 
     # track rank
     all_embeds_tensor = torch.Tensor(np.array(all_embeds))
     rank = smooth_rank_measure(all_embeds_tensor)  
     return ep_loss, rank
-
 
 def write_dict_to_config_file(config_dict, json_file_path):
     """
@@ -148,25 +108,19 @@ def get_args():
     args = vars(args)
 
     # hparams to vary 
-    METHOD = 'tangle'
-    STUDY = 'pancancer'
-    RNA_RECONSTRUCTION = True if METHOD == 'tanglerec' else False 
-    INTRA_MODALITY = True if METHOD == 'intra' else False 
-    STOPPING_CRITERIA = 'train_rank' if METHOD == 'tangle' or METHOD == 'intra' else 'fixed'
+    RNA_RECONSTRUCTION = True if args["study"] == 'tanglerec' else False 
+    INTRA_MODALITY = True if args["study"] == 'intra' else False 
+    STOPPING_CRITERIA = 'train_rank' if args["study"] == 'tangle' or args["study"] == 'intra' or args["study"] == 'tanglev2' else 'fixed'
+    RNA_TOKEN_DIM = 5248
 
-    args["objective"] = METHOD
+    args["objective"] = args["study"]
     args["rna_reconstruction"] = RNA_RECONSTRUCTION
     args["intra_modality_wsi"] = INTRA_MODALITY
     args["stopping_criteria"] = STOPPING_CRITERIA
-    args["study"] = STUDY
-    args["gpu_devices"] = [0, 1, 2]
-    args['feature_type'] = "uni_feats"
-    
-    # if pancancer then add all disease models 
-    if "pancancer" in STUDY:
-        args["cohorts"] = COHORTS
-    else:
-        args["cohorts"] = [STUDY]
+    args["study"] = args["study"]
+    args["gpu_devices"] = [int(x) for x in range(torch.cuda.device_count())]
+    args["cohorts"] = COHORTS
+    args["rna_token_dim"] = RNA_TOKEN_DIM
 
     # set loss -- here, we only provide info-nce
     args['loss'] = "info-nce"
@@ -207,10 +161,10 @@ if __name__ == "__main__":
     args = get_args()
     
     # paths
-    ROOT_SAVE_DIR = "results/{}_checkpoints_and_embeddings".format(args["study"])
-    ROOT_DATA_DIR = "data/"
-    EXP_CODE = "{}_{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_endLR{}_loss{}_hidDim{}_L2{}".format(
-        args['objective'],
+    ROOT_SAVE_DIR = "./results/{}_checkpoints_and_embeddings".format(args["study"])
+    ROOT_DATA_DIR = "./data/tcga"
+
+    EXP_CODE = "{}lr{}_epochs{}_bs{}_tokensize{}_temperature_{}_rna{}_dtype{}_nHeads{}_endLR{}_loss{}_hidDim{}_L2{}".format(
         args["study"],
         args["learning_rate"], 
         args["epochs"], 
@@ -226,7 +180,6 @@ if __name__ == "__main__":
         args['weight_decay'],
     )
     RESULS_SAVE_PATH = os.path.join(ROOT_SAVE_DIR, EXP_CODE)
-    ROOT_RNA_DIR = "rna_data/processed_data_{}/".format(args["rna_encoder"]) 
     
     os.makedirs(RESULS_SAVE_PATH, exist_ok=True)
     print(f"Running experiment {EXP_CODE}...")
@@ -240,39 +193,29 @@ if __name__ == "__main__":
     all_datasets = []
     all_labels = []
     for cohort in args["cohorts"]:
-        
-        feats_dir = os.path.join(ROOT_DATA_DIR, 'tcga', cohort, args["feature_type"])
-        rna_dir = os.path.join(ROOT_DATA_DIR, 'tcga', cohort, "rna_data")
+        feats_dir = os.path.join(ROOT_DATA_DIR, cohort, args["feature_type"])
+        rna_dir = os.path.join(ROOT_DATA_DIR, cohort, "molecular_data", "normed")
         
         curr_dataset = TangleDataset(
             feats_dir=feats_dir,
             rna_dir=rna_dir,
             sampling_strategy=args["sampling_strategy"], 
-            n_tokens=args["n_tokens"],
+            n_tokens=args["rna_token_dim"],
         )
         all_datasets.append(curr_dataset)
-        all_labels = all_labels + [LABELS[cohort]] * len(curr_dataset)
         
     dataset = ConcatDataset(all_datasets)
-    all_labels = np.array(all_labels)
-    class_weights = compute_class_weight('balanced', classes=np.unique(all_labels), y=all_labels)
-    class_weights_tensor = torch.tensor(class_weights, dtype=torch.float32)
-
+    print("* Training dataset size = {}".format(len(dataset)))
+    
     # set up dataloader
     print("* Setup dataloader...")
-    if args['weighted_sample'] == "yes":
-        sampler = WeightedRandomSampler(weights=class_weights_tensor, num_samples=len(dataset), replacement=True)
-        dataloader = DataLoader(dataset, batch_size=args["batch_size"], drop_last=True, collate_fn=collate_tangle, sampler=sampler)
-        print(" * Using weighted sampling")
-    else:
-        dataloader = DataLoader(dataset, batch_size=args["batch_size"], drop_last=True, shuffle=True, collate_fn=collate_tangle)
-        print(" * Using random sampling")
-     
+    dataloader = DataLoader(dataset, batch_size=args["batch_size"], drop_last=True, shuffle=True, collate_fn=collate_tangle)
+    
     # set up model config, n_tokens_wsi, n_tokens_rna, patch_embedding_dim
     print("* Setup model...")
     ssl_model = MMSSL(
         config=args,
-        n_tokens_rna=args["rna_token_dim"] ,
+        n_tokens_rna=args["rna_token_dim"],
     ).to(DEVICE).to(args['dtype']) 
     total_params = sum(p.numel() for p in ssl_model.parameters())
     print("* Total number of parameters = {}".format(total_params))

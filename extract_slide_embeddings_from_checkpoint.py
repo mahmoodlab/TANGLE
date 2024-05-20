@@ -22,9 +22,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # {dataset_name : "path_to_features"}
 DOWNSTREAM_TASKS_CONFIG = {
-    "bcnb" : "./data/bcnb_features"
+    "bcnb" : "./data/bcnb_features_uni"
 }
-
 
 def set_args(args, config_from_model):
     exp_code = args['pretrained'].split('/')[-1]
@@ -42,14 +41,18 @@ def read_config(path_to_config):
         return data 
  
 def restore_model(model, state_dict):
-    try:
-        model.load_state_dict(state_dict, strict=False)
-    except:
+    
+    sd = list(state_dict.keys())
+    contains_module = any('module' in entry for entry in sd)
+    
+    if not contains_module:
+        model.load_state_dict(state_dict, strict=True)
+    else:
         new_state_dict = OrderedDict()
         for k, v in state_dict.items():
             name = k[7:] 
             new_state_dict[name] = v
-        model.load_state_dict(new_state_dict, strict=False)
+        model.load_state_dict(new_state_dict, strict=True)
 
     return model 
 

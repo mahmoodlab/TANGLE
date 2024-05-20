@@ -78,7 +78,7 @@ def load_and_split(labels, embedding_path, study, k=1):
 
 def eval_single_task(DATASET_NAME, TASKS, PATH, verbose=True):
         
-    ALL_K = [1, 3, 5, 10, 25]
+    ALL_K = [1, 10, 25]
   
     if DATASET_NAME == "BCNB":
         EMBEDS_PATH = "{}/bcnb_results_dict.pkl".format(PATH) 
@@ -173,10 +173,10 @@ if __name__ == "__main__":
 
     # Put your slide embeddings here... 
     MODELS = {
-        'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
-        'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01",
-        'intra_brca': "results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
-        'tangle_pancancer': "results/pancancer_checkpoints_and_embeddings/tangle_pancancer"
+        # 'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
+        # 'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01",
+        # 'intra_brca': "results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
+        'tangle_pancancer': "results/tanglev2_checkpoints_and_embeddings/tanglev2_ajv_trained"
     }
 
     for exp_name, p in MODELS.items():

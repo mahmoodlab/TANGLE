@@ -164,7 +164,6 @@ def write_dict_to_config_file(config_dict, json_file_path):
     with open(json_file_path, 'w') as jsonfile:
         json.dump(config_dict, jsonfile, indent=4)
 
-
 if __name__ == "__main__":
     
     # setup args and seed
@@ -176,11 +175,9 @@ if __name__ == "__main__":
     RNA_RECONSTRUCTION = True if args["method"] == 'tanglerec' else False 
     INTRA_MODALITY = True if args["method"] == 'intra' else False 
     STOPPING_CRITERIA = 'train_rank' if args["method"] == 'tangle' or args["method"] == 'intra' else 'fixed'
-    N_TOKENS_RNA = 4908 if args["study"]=='nsclc' else 4999
 
     args["rna_reconstruction"] = RNA_RECONSTRUCTION
     args["intra_modality_wsi"] = INTRA_MODALITY
-    args["rna_token_dim"] = N_TOKENS_RNA
 
     # paths 
     ROOT_SAVE_DIR = "./results/{}_checkpoints_and_embeddings".format(args["study"])

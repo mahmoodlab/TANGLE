@@ -9,6 +9,8 @@ import numpy as np
 # --> Internal imports 
 from .abmil import BatchedABMIL
 
+import pdb
+
 
 class MMSSL(nn.Module):
     def __init__(self, config, n_tokens_rna):
@@ -68,7 +70,7 @@ class MMSSL(nn.Module):
 
         ########## RNA embedder: Linear or MLP #############
         if self.config["rna_encoder"] == "mlp":
-            if self.config["study"] == "pancancer":
+            if self.config["study"] == "tanglev2":
                 self.rna_embedder = MLP(input_dim=n_tokens_rna, hidden_dim=self.config["hidden_dim"], output_dim=self.config["hidden_dim"])
             else:
                 self.rna_embedder = MLP(input_dim=n_tokens_rna, hidden_dim=n_tokens_rna, output_dim=self.config["embedding_dim"])

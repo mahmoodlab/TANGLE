@@ -75,7 +75,32 @@ These models perform as:
 | **Tangle-Rec** | 0.693   | 0.57   | 0.505   | 0.811    | 0.735   | 0.603   | 0.82    | 0.755   | 0.651   |
 | **Intra**  | 0.56   | 0.516   | 0.496   | 0.692    | 0.636   | 0.571   | 0.737    | 0.678   | 0.625   |
 
-### Training on all TCGA cohorts
+### Training on all TCGA cohorts (Tanglev2)
+
+Tanglev2 training assumes you have TCGA cohorts organized in the following format
+
+```
+tcga
+|__brca
+   |____uni_features
+        |__slide_id_0.pt
+        |__slide_id_1.pt
+   |____molecular_data
+        |____normed
+          |__slide_id_0.pt
+          |__slide_id_1.pt
+.
+.
+.
+|__ucec
+   |____uni_features
+        |__slide_id_0.pt
+        |__slide_id_1.pt
+   |____molecular_data
+        |____normed
+          |__slide_id_0.pt
+          |__slide_id_1.pt
+```
 
 To train Tanglev2 on all TCGA cohorts, use:
 
