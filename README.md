@@ -37,7 +37,7 @@ Preprocessing the corresponding gene expression profile can be done in several w
 
 ### Training on TCGA-BRCA
 
-To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=sharing) that includes (1) TCGA-BRCA UNI patch embeddings, and (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`. The folder structure should look like:
+To simplify reproducing results, we provide a link to a [Drive](https://drive.google.com/drive/folders/1GIJEITf5-7lFKil7Dfi3sSmVFgzh-otv?usp=drive_link) that includes (1) TCGA-BRCA UNI patch embeddings, and (2) the corresponding expression profiles as `pt` files. These need to be downloaded and moved to the base directory in a new dir called `data`. The folder structure should look like:
 
 ```
 data
@@ -102,7 +102,7 @@ python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAI
 python run_linear_probing.py
 ```
 
-These models perform as:
+AUC performance of these models is:
 
 |            | |   k=1   |      |  |   k=10  |      |  |   k=25  |      |
 |------------|-----|-----|------|------|-----|------|------|-----|------|
@@ -114,7 +114,30 @@ These models perform as:
 
 ### Additional TANGLEv2 evaluation 
 
+AUC performance of TANGLEv2 on internal breast and lung cohorts for morphological and molecular subtyping.
 
+|| k=1 | k=10 | k=all | 
+|------------|-----|-----|------|
+| MGB Breast subtyping | 0.661  | 0.891  | 0.975 |
+| MGB Breast ER | 0.604  | 0.661  | 0.715 |
+| MGB Breast PR | 0.645  | 0.638  | 0.651 |
+| MGB Breast HER2 | 0.509  | 0.59  | 0.685 |
+| MGB Lung subtyping | 0.778  | 0.928  | 0.978 |
+| MGB Lung TTF-1 | 0.633  | 0.761  | 0.822 |
+| MGB Lung P40 | 0.609  | 0.74  | 0.837 |
+| MGB Lung P63| 0.595  | 0.638  | 0.755 |
+| MGB Lung napsina | 0.621  | 0.771  | 0.779 |
+| MGB Lung CDX-2| 0.60  | 0.535  | 0.612 |
+| MGB Lung CD5-6 | 0.628  | 0.794  | 0.889 |
+
+Balanced accuracy performance of TANGLEv2 on eBrains and BRACS. 
+
+|| k=1 | k=10 | k=all | 
+|------------|-----|-----|------|
+| eBrains fine-grained | 0.309  | 0.647  | 0.672 |
+| eBrains coarse       | 0.43  | 0.778  | 0.842 |
+| BRACS fine-grained   | 0.172  | 0.266  | 0.344 |
+| BRACS coarse         | 0.389  | 0.536  | 0.583 |
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.
