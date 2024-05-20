@@ -182,7 +182,7 @@ if __name__ == "__main__":
         'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
         'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01",
         'intra_brca': "results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
-        'tangle_pancancer': "results/pancancer_checkpoints_and_embeddings/tanglev2_ajv_trained"
+        'tangle_pancancer': "results/pancancer_checkpoints_and_embeddings/tanglev2_mhabmil"
     }
 
     for exp_name, p in MODELS.items():
