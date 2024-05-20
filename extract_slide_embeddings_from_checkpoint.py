@@ -22,11 +22,11 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # {dataset_name : "path_to_features"}
 DOWNSTREAM_TASKS_CONFIG = {
-    "bcnb" : "./data/bcnb_features_uni"
+    "bcnb": "./data/brca/uni_features/bcnb_features",
 }
 
 def set_args(args, config_from_model):
-    exp_code = args['pretrained'].split('/')[-1]
+    exp_code = os.path.split(os.path.normpath(args['pretrained']))[-1]
     args['study'] = exp_code.split('_')[0]
     for key in ['wsi_encoder', 'activation', 'method', 'n_heads', 'hidden_dim', 'rna_encoder', 'embedding_dim', 'rna_token_dim']:
         args[key] = config_from_model[key]

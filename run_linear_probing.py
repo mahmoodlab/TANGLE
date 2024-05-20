@@ -4,7 +4,8 @@ import os
 import numpy as np
 import pickle
 
-
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import balanced_accuracy_score, cohen_kappa_score, roc_auc_score
 
@@ -35,12 +36,17 @@ def calculate_metrics(y_true, y_pred, pred_scores):
     return auc, bacc
 
 
-def load_and_split(labels, embedding_path, study, k=1):
+def load_and_split(labels, embedding_path, study, k=1, normalize=False):
 
     # 1. load embeddings as dict where key is slide ID 
     file = open(embedding_path, 'rb')
     obj = pickle.load(file)
     embeddings = obj['embeds']
+
+    if normalize:
+        pipe = Pipeline([('scaler', StandardScaler())])
+        embeddings = pipe.fit_transform(embeddings)
+
     slide_ids = obj['slide_ids']
     slide_ids = [str(x) for x in slide_ids]
     embeddings = {n: e for e, n in zip(embeddings, slide_ids)}
@@ -173,10 +179,10 @@ if __name__ == "__main__":
 
     # Put your slide embeddings here... 
     MODELS = {
-        # 'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
-        # 'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01",
-        # 'intra_brca': "results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
-        'tangle_pancancer': "results/tanglev2_checkpoints_and_embeddings/tanglev2_ajv_trained"
+        'tangle_brca': "results/brca_checkpoints_and_embeddings/tangle_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
+        'tanglerec_brca': "results/brca_checkpoints_and_embeddings/tanglerec_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01",
+        'intra_brca': "results/brca_checkpoints_and_embeddings/intra_brca_lr0.0001_epochs100_bs64_tokensize2048_temperature0.01/",
+        'tangle_pancancer': "results/pancancer_checkpoints_and_embeddings/tanglev2_ajv_trained"
     }
 
     for exp_name, p in MODELS.items():

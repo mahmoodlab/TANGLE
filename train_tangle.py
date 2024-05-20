@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
     # paths 
     ROOT_SAVE_DIR = "./results/{}_checkpoints_and_embeddings".format(args["study"])
-    EXP_CODE = "{}_{}_lr{}_epochs{}_bs{}_tokensize{}_temperature{}".format(
+    EXP_CODE = "{}_{}_lr{}_epochs{}_bs{}_tokensize{}_temperature{}_uni".format(
         args["method"],
         args["study"],
         args["learning_rate"], 
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     # make tangle dataset
     print("* Setup dataset...")
     dataset = TangleDataset(
-        feats_dir="./data/{}/ctranspath_features/tcga_features/".format(args["study"]), 
+        feats_dir="./data/{}/uni_features/tcga_features/".format(args["study"]), 
         rna_dir='./data/{}/rna'.format(args["study"]), 
         sampling_strategy=args["sampling_strategy"], 
         n_tokens=args["n_tokens"]
