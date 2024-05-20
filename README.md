@@ -10,7 +10,7 @@ This work introduces the first method for **slide representation learning** usin
 ## Code
 This repository contains the implementation of **TANGLE**, with step-by-step instructions to pretrain a TANGLE model on the **TCGA-BRCA** (Invasive breast cancer) cohort. The resulting models is evaluated using linear probing (logistic regression) on BCNC for ER/PR/HER2 status prediction. While **TANGLE** paper uses CTransPath and ResNet50-IN patch encoders, we provide instructions and checkpoints when using the UNI patch encoder (Chen et al., Nature Medicine, 2024). 
 
-In addition, we provide a script and checkpoint for pan-cancer TANGLE pretraining that aggregates all TCGA cohorts into a unified training. This model was not part of TANGLE and is referred to as TANGLEv2. This improvement over Tangle will be out soon (more information will follow). 
+In addition, we provide a script and checkpoint for pan-cancer **TANGLE** pretraining that aggregates **all** TCGA cohorts into a unified training. This model was not part of TANGLE and is referred to as TANGLEv2. More information will follow. 
 
 ### Installation
 
@@ -54,27 +54,6 @@ To train Tangle (and baselines), use:
 source scripts/launch_tangle_training.sh
 ```
 
-### Evaluate TANGLE trained with TCGA-BRCA on BCNB molecular status prediction
-
-We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=sharing) that includes (1) 3 pretrained checkpoints for Tangle, Tangle-Rec and Intra, and (2) pre-extracted BCNC slide embeddings and evaluation. In addition, we provide a script for downstream evaluation on BCNB. 
-
-To run few-shot evaluation:
-
-```bash
-# Extract slide embeddings 
-python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAINED_MODEL>
-python run_linear_probing.py
-```
-
-These models perform as:
-
-|            | |   k=1   |      |  |   k=10  |      |  |   k=25  |      |
-|------------|-----|-----|------|------|-----|------|------|-----|------|
-|            | ER  | PR  | HER2 | ER   | PR  | HER2 | ER   | PR  | HER2 |
-| **Tangle** | 0.681 | 0.579   | 0.514   | 0.826    | 0.752   | 0.651   | 0.847    | 0.77   | 0.664   |
-| **Tangle-Rec** | 0.693   | 0.57   | 0.505   | 0.811    | 0.735   | 0.603   | 0.82    | 0.755   | 0.651   |
-| **Intra**  | 0.56   | 0.516   | 0.496   | 0.692    | 0.636   | 0.571   | 0.737    | 0.678   | 0.625   |
-
 ### Training on all TCGA cohorts (Tanglev2)
 
 Tanglev2 training assumes you have TCGA cohorts organized in the following format
@@ -110,6 +89,32 @@ source scripts/launch_tanglev2_training.sh
 ```
 
 Note that due to storage constraints, we cannot provide pre-extracted patch embeddings and gene expression data.  
+
+### Evaluate TANGLE (BRCA-trained) and TANGLEv2 (pancancer-trained) on BCNB molecular status prediction
+
+We provide a link to a [Drive](https://drive.google.com/drive/folders/1IKEuRULUz-Uvb8ZL8vvYw0Z49aD_Qp_4?usp=drive_link) that includes (1) 4 pretrained checkpoints for Tangle-PanCancer, Tangle-BRCA, Tangle-Rec and Intra, and (2) pre-extracted BCNC slide embeddings and evaluation. In addition, we provide two scripts for downstream evaluation on BCNB. 
+
+To run few-shot evaluation:
+
+```bash
+# Extract slide embeddings 
+python extract_slide_embeddings_from_checkpoint.py --pretrained <PATH_TO_PRETRAINED_MODEL>
+python run_linear_probing.py
+```
+
+These models perform as:
+
+|            | |   k=1   |      |  |   k=10  |      |  |   k=25  |      |
+|------------|-----|-----|------|------|-----|------|------|-----|------|
+|            | ER  | PR  | HER2 | ER   | PR  | HER2 | ER   | PR  | HER2 |
+| **Tangle (BRCA)** | 0.681 | 0.579   | 0.514   | 0.826    | 0.752   | 0.651   | 0.847    | 0.77   | 0.664   |
+| **Tanglev2 (Pancancer)** | 0.637  | 0.587   | 0.53   | 0.791    | 0.72   | 0.63   | 0.817    | 0.755   | 0.67   |
+| **Tangle-Rec** | 0.693   | 0.57   | 0.505   | 0.811    | 0.735   | 0.603   | 0.82    | 0.755   | 0.651   |
+| **Intra**  | 0.56   | 0.516   | 0.496   | 0.692    | 0.636   | 0.571   | 0.737    | 0.678   | 0.625   |
+
+### Additional TANGLEv2 evaluation 
+
+
 
 ## Issues 
 - The preferred mode of communication is via GitHub issues.
