@@ -157,3 +157,5 @@ If you find our work useful in your research, please consider citing:
   year={2024}
 }
 ```
+
+<img src=docs/joint_logo.png> 
